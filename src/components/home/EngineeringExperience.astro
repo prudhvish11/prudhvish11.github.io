@@ -11,8 +11,8 @@ const skills = [
 
 const roles = [
   { title: 'Software Engineer Intern', period: 'Mar — Jun 2024' },
-  { title: 'Associate', period: '2024' },
-  { title: 'Analyst', period: 'Oct 2024 — Now' },
+  { title: 'Associate', period: 'Oct 2024 — May 2026' },
+  { title: 'Analyst', period: 'May 2026 — Now' },
 ];
 ---
 
@@ -41,7 +41,6 @@ const roles = [
     <div class="experience-track" aria-label="Career progression at Accenture">
       <p class="type-meta track-years"><span>2024</span><span>NOW</span></p>
       <div class="track-line" aria-hidden="true"></div>
-      <p class="type-meta track-company">ACCENTURE</p>
       <div class="track-roles">
         {roles.map((role) => (
           <div class="track-role">
@@ -50,6 +49,7 @@ const roles = [
           </div>
         ))}
       </div>
+      <p class="type-meta track-company">ACCENTURE</p>
     </div>
   </div>
 </section>
@@ -116,7 +116,7 @@ const roles = [
     letter-spacing: 0.15em;
     color: var(--warm-white);
     font-weight: 600;
-    margin-bottom: var(--space-8);
+    margin-top: var(--space-8);
   }
 
   @media (min-width: 700px) {
