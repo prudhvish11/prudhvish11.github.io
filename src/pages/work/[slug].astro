@@ -6,6 +6,7 @@ import FlowDiagram from '../../components/diagrams/FlowDiagram.astro';
 import NlpHubDiagram from '../../components/diagrams/NlpHubDiagram.astro';
 import nlpScreenshot from '../../assets/projects/nlp-hub/nlp-hub-landing.png';
 import viduScreenshot from '../../assets/projects/imposter/vidu-kadhu-landing.png';
+import lifeosScreenshot from '../../assets/projects/lifeos/lifeos-dashboard-desktop-original.png';
 
 export async function getStaticPaths() {
   const entries = await getCollection('work');
@@ -17,6 +18,9 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+
+const lifeosAlt =
+  "LifeOS desktop dashboard showing navigation for tasks, planning, goals and personal modules, with quick tracking, today's tasks, upcoming items and calendar panels.";
 ---
 
 <WorkLayout entry={entry}>
@@ -48,6 +52,12 @@ const { Content } = await render(entry);
     />
   )}
 
+  {entry.data.visualType === 'product-screens' && (
+    <figure class="media-frame case-shot case-shot--lifeos">
+      <Image src={lifeosScreenshot} alt={lifeosAlt} widths={[768, 1024, 1440, 2048]} sizes="(min-width: 900px) 900px, 92vw" loading="lazy" decoding="async" />
+    </figure>
+  )}
+
   {entry.data.visualType === 'playful-product' && (
     <figure class="media-frame case-shot">
       <Image src={viduScreenshot} alt="Vidu Kadhu's landing screen, with Create Room and Join Room buttons" widths={[480, 768]} sizes="(min-width: 900px) 700px, 90vw" loading="lazy" />
@@ -67,6 +77,19 @@ const { Content } = await render(entry);
     margin-bottom: var(--space-8);
     aspect-ratio: 4 / 3;
     max-width: 700px;
+  }
+
+  .case-shot--lifeos {
+    aspect-ratio: 2048 / 1059;
+    max-width: 900px;
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .case-shot--lifeos :global(img) {
+    object-fit: contain;
+    background: #0c1220;
   }
 
   .case-shot figcaption {
