@@ -45,7 +45,10 @@ const roles = [
           <p class="role-title">{roles[0].title}</p>
           <p class="type-meta">{roles[0].period}</p>
         </div>
-        <p class="type-meta track-company">ACCENTURE</p>
+        <div class="track-company">
+          <p class="type-meta">ACCENTURE</p>
+          <p class="track-company-note">Software Associate in between</p>
+        </div>
         <div class="track-role">
           <p class="role-title">{roles[1].title}</p>
           <p class="type-meta">{roles[1].period}</p>
@@ -112,10 +115,24 @@ const roles = [
     color: var(--warm-white);
   }
 
-  .track-company {
+  .track-company p {
     letter-spacing: 0.1em;
+  }
+
+  .track-company .type-meta {
     color: var(--warm-white);
     font-weight: 600;
+  }
+
+  .track-company-note {
+    margin-top: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--text-meta);
+    font-weight: 400;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--stone);
   }
 
   @media (min-width: 700px) {
