@@ -1,0 +1,148 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('writing')).sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
+);
+
+const categories = ['ALL', 'TECHNOLOGY', 'AI', 'ENGINEERING', 'ECONOMICS', 'MOBILITY', 'IDEAS'];
+---
+
+<BaseLayout
+  title="Writing — Prudhvish Narayanam"
+  description="Questions, observations, and things worth understanding — essays by Prudhvish Narayanam."
+>
+  <div class="chapter-light" data-chapter-theme="light">
+    <header class="container writing-index-header">
+      <h1 class="type-chapter">WRITING</h1>
+      <p class="type-support balance">Questions, observations, and things worth understanding.</p>
+    </header>
+
+    <div class="writing-filterable">
+      <div class="container filter-row type-meta">
+        {categories.map((cat, i) => (
+          <span class="filter-item">
+            <input type="radio" name="category" id={`filter-${cat}`} checked={i === 0} class="visually-hidden" />
+            <label for={`filter-${cat}`}>{cat}</label>
+          </span>
+        ))}
+      </div>
+
+      <ol class="container writing-index">
+      {posts.map((post, i) => (
+        <li data-categories={post.data.categories.join(' ')}>
+          <a
+            href={post.data.externalUrl ?? `/writing/${post.id}`}
+            class="index-row"
+            target={post.data.externalUrl ? '_blank' : undefined}
+            rel={post.data.externalUrl ? 'noopener noreferrer' : undefined}
+          >
+            <span class="row-index type-meta">{String(i + 1).padStart(2, '0')}</span>
+            <span class="row-title">{post.data.title}</span>
+            <span class="row-year type-meta">{post.data.publishedAt.getFullYear()}</span>
+            <span class="row-cats type-meta">{post.data.categories.join(' / ')}</span>
+          </a>
+        </li>
+      ))}
+      </ol>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .writing-index-header {
+    padding-top: var(--space-16);
+  }
+
+  .writing-index-header .type-support {
+    margin-top: var(--space-6);
+    max-width: 40ch;
+    color: var(--stone);
+  }
+
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    margin-top: var(--space-12);
+  }
+
+  .filter-item label {
+    cursor: pointer;
+    padding-block: var(--space-2);
+    border-bottom: 2px solid transparent;
+  }
+
+  .filter-item input:checked + label {
+    color: var(--maroon);
+    border-bottom-color: var(--maroon);
+  }
+
+  .filter-item input:focus-visible + label {
+    outline: 2px solid var(--maroon);
+    outline-offset: 3px;
+  }
+
+  .writing-index {
+    margin-top: var(--space-8);
+    border-top: 1px solid var(--border-light);
+  }
+
+  .index-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      'index title'
+      '.     year'
+      '.     cats';
+    gap: var(--space-1) var(--space-4);
+    padding-block: var(--space-6);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .row-index {
+    grid-area: index;
+    color: var(--maroon);
+  }
+
+  .row-title {
+    grid-area: title;
+    font-family: var(--font-sans);
+    font-size: clamp(1.15rem, 1rem + 1vw, 1.6rem);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .row-year {
+    grid-area: year;
+    color: var(--stone);
+  }
+
+  .row-cats {
+    grid-area: cats;
+    color: var(--stone);
+  }
+
+  @media (min-width: 700px) {
+    .index-row {
+      grid-template-columns: 3rem 1fr auto auto;
+      grid-template-areas: 'index title year cats';
+      align-items: baseline;
+    }
+
+    .row-year {
+      padding-inline-end: var(--space-6);
+    }
+  }
+
+  /* Category filter — pure CSS, no JS */
+  .writing-filterable:has(#filter-TECHNOLOGY:checked) .writing-index li:not([data-categories~='Technology']),
+  .writing-filterable:has(#filter-AI:checked) .writing-index li:not([data-categories~='AI']),
+  .writing-filterable:has(#filter-ENGINEERING:checked) .writing-index li:not([data-categories~='Engineering']),
+  .writing-filterable:has(#filter-ECONOMICS:checked) .writing-index li:not([data-categories~='Economics']),
+  .writing-filterable:has(#filter-MOBILITY:checked) .writing-index li:not([data-categories~='Mobility']),
+  .writing-filterable:has(#filter-IDEAS:checked) .writing-index li:not([data-categories~='Ideas']) {
+    display: none;
+  }
+</style>

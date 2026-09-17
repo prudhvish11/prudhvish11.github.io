@@ -1,0 +1,148 @@
+---
+const navItems = [
+  { number: '01', label: 'WORK', href: '/work' },
+  { number: '02', label: 'WRITING', href: '/writing' },
+  { number: '03', label: 'ABOUT', href: '/about' },
+  { number: '04', label: 'RESUME', href: '/resume' },
+];
+---
+
+<header class="site-header" data-nav-theme="light" data-site-header>
+  <div class="container header-inner">
+    <a href="/" class="mark" aria-label="Prudhvish Narayanam — home">PN.</a>
+
+    <nav class="desktop-nav" aria-label="Primary">
+      <ul>
+        {navItems.map((item) => (
+          <li>
+            <a href={item.href}>
+              <span class="nav-label">{item.label}</span>
+              <span class="nav-number" aria-hidden="true">{item.number}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a href="/#contact" class="contact-arrow" aria-label="Jump to contact">↗</a>
+    </nav>
+
+    <button
+      type="button"
+      class="menu-trigger"
+      data-menu-trigger
+      aria-haspopup="dialog"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+    >
+      <span class="visually-hidden">Open menu</span>
+      <span aria-hidden="true">☰</span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    transition:
+      background-color var(--duration-medium) var(--ease-standard),
+      color var(--duration-medium) var(--ease-standard),
+      border-color var(--duration-medium) var(--ease-standard);
+    border-bottom: 1px solid transparent;
+  }
+
+  .site-header[data-nav-theme='dark'] {
+    background: color-mix(in srgb, var(--near-black) 92%, transparent);
+    color: var(--warm-white);
+    border-bottom-color: var(--border-dark);
+  }
+
+  .site-header[data-nav-theme='light'] {
+    color: var(--ink);
+    border-bottom-color: transparent;
+  }
+
+  .site-header[data-scrolled='true'][data-nav-theme='light'] {
+    border-bottom-color: var(--border-light);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4.25rem;
+  }
+
+  .mark {
+    font-weight: 700;
+    font-size: 1.125rem;
+    letter-spacing: -0.02em;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+    }
+
+    .desktop-nav ul {
+      display: flex;
+      gap: var(--space-8);
+      font-family: var(--font-mono);
+      font-size: var(--text-meta);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .desktop-nav a {
+      display: inline-flex;
+      align-items: baseline;
+      gap: var(--space-2);
+      padding-block: var(--space-2);
+    }
+
+    .nav-number {
+      opacity: 0;
+      color: var(--maroon);
+      transition: opacity var(--duration-fast) var(--ease-standard);
+      font-size: 0.7em;
+    }
+
+    .desktop-nav a:hover .nav-number,
+    .desktop-nav a:focus-visible .nav-number {
+      opacity: 1;
+    }
+
+    .contact-arrow {
+      font-size: 1.1rem;
+      transition: transform var(--duration-fast) var(--ease-standard);
+    }
+
+    .contact-arrow:hover,
+    .contact-arrow:focus-visible {
+      transform: translate(2px, -2px);
+    }
+  }
+
+  .menu-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    font-size: 1.25rem;
+    margin-inline-end: calc(var(--space-2) * -1);
+  }
+
+  @media (min-width: 900px) {
+    .menu-trigger {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prudhvish11.github.io/sitemap-index.xml

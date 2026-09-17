@@ -1,0 +1,161 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ArrowLink from '../components/global/ArrowLink.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'work'>;
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+
+const categoryLabel: Record<string, string> = {
+  professional: 'Professional',
+  independent: 'Independent Build',
+  research: 'Research',
+  'personal-lab': 'Personal Lab',
+};
+---
+
+<BaseLayout title={data.seoTitle} description={data.seoDescription}>
+  <article class="chapter-light work-article" data-chapter-theme="light">
+    <header class="container work-header">
+      <p class="type-meta">
+        <a href="/work">WORK</a> / {categoryLabel[data.category]}
+      </p>
+      <h1 class="type-chapter balance">{data.name}</h1>
+      <p class="type-support work-summary">{data.summary}</p>
+
+      <dl class="work-meta">
+        <div>
+          <dt class="type-meta">TYPE</dt>
+          <dd>{categoryLabel[data.category]}</dd>
+        </div>
+        <div>
+          <dt class="type-meta">PERIOD</dt>
+          <dd>{data.period}</dd>
+        </div>
+        <div>
+          <dt class="type-meta">STATUS</dt>
+          <dd>{data.status}</dd>
+        </div>
+        <div>
+          <dt class="type-meta">STACK</dt>
+          <dd>{data.technologies.join(' / ')}</dd>
+        </div>
+      </dl>
+
+      <div class="work-links">
+        {data.externalUrl && (
+          <ArrowLink href={data.externalUrl} direction="external" external>View live</ArrowLink>
+        )}
+        {data.sourceUrl && (
+          <ArrowLink href={data.sourceUrl} direction="external" external>Source</ArrowLink>
+        )}
+      </div>
+
+      {data.confidentialityNote && <p class="type-meta note">{data.confidentialityNote}</p>}
+      {data.attributionNote && <p class="type-meta note">{data.attributionNote}</p>}
+    </header>
+
+    <div class="container work-body">
+      <slot />
+    </div>
+
+    <div class="container work-footer">
+      <ArrowLink href="/work" direction="deeper">Back to all work</ArrowLink>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .work-header {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-12);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .work-header a {
+    color: var(--maroon);
+  }
+
+  .work-summary {
+    margin-top: var(--space-6);
+    max-width: 56ch;
+    color: var(--stone);
+  }
+
+  .work-meta {
+    margin-top: var(--space-12);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+
+  .work-meta dd {
+    margin-top: var(--space-2);
+    font-size: 1.05rem;
+  }
+
+  .work-links {
+    display: flex;
+    gap: var(--space-8);
+    margin-top: var(--space-8);
+  }
+
+  .note {
+    margin-top: var(--space-6);
+    max-width: 60ch;
+    color: var(--stone);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .work-body {
+    padding-block: var(--space-16);
+    max-width: var(--reading-max);
+  }
+
+  .work-body :global(h2) {
+    font-family: var(--font-sans);
+    font-size: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-top: var(--space-12);
+    margin-bottom: var(--space-4);
+  }
+
+  .work-body :global(p) {
+    color: var(--ink);
+    line-height: 1.7;
+    margin-top: var(--space-4);
+  }
+
+  .work-body :global(ul) {
+    margin-top: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-left: 1.25em;
+  }
+
+  .work-body :global(li) {
+    list-style: disc;
+  }
+
+  .work-body :global(strong) {
+    font-weight: 600;
+  }
+
+  .work-footer {
+    padding-bottom: var(--space-16);
+  }
+
+  @media (min-width: 700px) {
+    .work-meta {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

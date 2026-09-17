@@ -1,0 +1,121 @@
+---
+import { getEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import ArrowLink from '../global/ArrowLink.astro';
+import screenshot from '../../assets/projects/imposter/vidu-kadhu-landing.png';
+
+const lifeos = await getEntry('work', 'lifeos');
+const imposter = await getEntry('work', 'imposter');
+---
+
+<section class="chapter chapter-light render-contained" data-chapter-theme="light" aria-labelledby="lab-heading">
+  <div class="container">
+    <p class="type-meta lab-kicker">AI-ASSISTED BUILD</p>
+    <h2 id="lab-heading" class="type-chapter balance">
+      PERSONAL LAB
+      <span class="type-serif lab-sub">Experiment. Design. Ship.</span>
+    </h2>
+    <p class="type-support lab-intro">Ideas I turn into working products with AI-assisted development.</p>
+
+    <div class="lab-grid">
+      <article class="lab-card lab-card--lifeos">
+        <p class="type-meta">{lifeos?.data.labels.join(' / ')}</p>
+        <h3 class="type-project">LifeOS</h3>
+        <p class="type-support lab-tagline">{lifeos?.data.homepageSummary}</p>
+        <p class="type-body lab-desc">{lifeos?.data.summary}</p>
+        <div class="lab-links">
+          <ArrowLink href={lifeos?.data.externalUrl ?? '#'} direction="external" external>View live</ArrowLink>
+          <ArrowLink href="/work/lifeos" direction="deeper">Case study</ArrowLink>
+        </div>
+      </article>
+
+      <article class="lab-card lab-card--imposter">
+        <figure class="media-frame lab-shot">
+          <Image src={screenshot} alt="Vidu Kadhu's landing screen, with Create Room and Join Room buttons" widths={[480, 768]} sizes="(min-width: 900px) 44vw, 90vw" loading="lazy" />
+        </figure>
+        <p class="type-meta">{imposter?.data.labels.join(' / ')}</p>
+        <h3 class="type-project">{imposter?.data.name}</h3>
+        <p class="type-support lab-tagline">{imposter?.data.summary}</p>
+        <div class="lab-links">
+          <ArrowLink href={imposter?.data.externalUrl ?? '#'} direction="external" external>Play</ArrowLink>
+          <ArrowLink href="/work/imposter" direction="deeper">Case study</ArrowLink>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .lab-kicker {
+    margin-bottom: var(--space-4);
+  }
+
+  .lab-sub {
+    display: block;
+    font-size: 0.45em;
+    margin-top: var(--space-3);
+  }
+
+  .lab-intro {
+    max-width: 42ch;
+    margin-top: var(--space-6);
+    color: var(--stone);
+  }
+
+  .lab-grid {
+    margin-top: var(--space-16);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+
+  .lab-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .lab-card--lifeos {
+    background: var(--near-black);
+    color: var(--warm-white);
+    padding: var(--space-8);
+  }
+
+  .lab-card--lifeos .type-meta {
+    color: #9a9792;
+  }
+
+  .lab-tagline {
+    font-style: italic;
+  }
+
+  .lab-desc {
+    color: var(--stone);
+  }
+
+  .lab-card--imposter .lab-desc,
+  .lab-card--imposter .type-body {
+    color: var(--ink);
+  }
+
+  .lab-shot {
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--border-light);
+  }
+
+  .lab-links {
+    display: flex;
+    gap: var(--space-6);
+    margin-top: var(--space-2);
+  }
+
+  @media (min-width: 900px) {
+    .lab-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .lab-card--lifeos {
+      padding: var(--space-12);
+    }
+  }
+</style>

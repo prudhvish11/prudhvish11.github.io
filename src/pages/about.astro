@@ -1,0 +1,178 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import mainPhoto from '../assets/photos/about_track_night_portrait_original.jpeg';
+
+const timeline = [
+  { year: '2022', label: 'NLP / ML EXPERIMENTS' },
+  { year: '2023', label: 'APPLIED ML + WEB' },
+  { year: '2024', label: 'COMPUTER VISION + ENTERPRISE SOFTWARE' },
+  { year: '2025', label: 'ANDROID + CLOUD' },
+  { year: '2026', label: 'SYSTEMS + RAG + PERSONAL PRODUCTS' },
+];
+
+const interests = ['WRITING', 'BADMINTON', 'FITNESS', 'TRAVEL', 'LEARNING'];
+---
+
+<BaseLayout
+  title="About — Prudhvish Narayanam"
+  description="Engineer, builder, writer, learner — how Prudhvish Narayanam got here, how he thinks, and what fills the space outside work."
+>
+  <div class="chapter-light" data-chapter-theme="light">
+    <header class="container about-hero">
+      <h1 class="type-chapter">
+        ENGINEER.<br />BUILDER.<br />WRITER.<br />LEARNER.
+      </h1>
+      <figure class="media-frame about-hero-photo">
+        <Image src={mainPhoto} alt="Prudhvish at a go-kart track at night, looking back over his shoulder" widths={[480, 768, 1024]} sizes="(min-width: 900px) 40vw, 85vw" loading="eager" />
+      </figure>
+    </header>
+
+    <section class="container about-chapter" aria-labelledby="now-heading">
+      <p class="type-meta">01 / NOW</p>
+      <p class="type-support balance chapter-copy">
+        Working as an Analyst at Accenture, building production Android software and a
+        repository-aware RAG workflow — while keeping a personal lab running on the side.
+      </p>
+    </section>
+
+    <section class="container about-chapter" aria-labelledby="path-heading">
+      <p class="type-meta" id="path-heading">02 / HOW I GOT HERE</p>
+      <ol class="timeline">
+        {timeline.map((step) => (
+          <li>
+            <span class="type-meta timeline-year">{step.year}</span>
+            <span class="timeline-label">{step.label}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="container about-chapter" aria-labelledby="think-heading">
+      <p class="type-meta" id="think-heading">03 / HOW I THINK</p>
+      <p class="type-support balance chapter-copy">
+        I like understanding how something actually works before I trust it — in code, in systems,
+        and in the questions I end up writing about.
+      </p>
+    </section>
+
+    <section class="container about-chapter" aria-labelledby="outside-heading">
+      <p class="type-meta" id="outside-heading">04 / OUTSIDE WORK</p>
+      <p class="type-support balance chapter-copy">
+        Writing, badminton, fitness, travel and learning usually fill the space outside work.
+      </p>
+      <ul class="interest-list">
+        {interests.map((interest) => <li class="type-meta">{interest}</li>)}
+      </ul>
+    </section>
+
+    <section class="container about-chapter" aria-labelledby="education-heading">
+      <p class="type-meta" id="education-heading">05 / EDUCATION</p>
+      <p class="education-degree">B.Tech — Computer Science</p>
+      <p class="type-body">Kalasalingam Academy of Research and Education</p>
+      <p class="type-meta education-meta">2020 – 2024 · CGPA 9.15</p>
+    </section>
+
+    <section class="container about-chapter about-chapter--last" aria-labelledby="milestones-heading">
+      <p class="type-meta" id="milestones-heading">06 / MILESTONES</p>
+      <ul class="milestones type-body">
+        <li>Accenture ACE Award</li>
+        <li>Promoted to Analyst at Accenture</li>
+        <li>IEEE publication — DeTox (TQCEBT-24)</li>
+        <li>Microsoft Certified: Azure AI Fundamentals</li>
+        <li>IBM AI Engineering Professional Certificate</li>
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-hero {
+    padding-top: var(--space-16);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .about-hero-photo {
+    aspect-ratio: 4 / 5;
+    max-width: 420px;
+  }
+
+  .about-hero-photo :global(img) {
+    object-position: 80% 30%;
+  }
+
+  .about-chapter {
+    padding-block: var(--space-16);
+    border-top: 1px solid var(--border-light);
+  }
+
+  .about-chapter--last {
+    padding-bottom: var(--space-24);
+  }
+
+  .chapter-copy {
+    margin-top: var(--space-6);
+    max-width: 56ch;
+  }
+
+  .timeline {
+    margin-top: var(--space-8);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .timeline li {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-6);
+    padding-block: var(--space-3);
+  }
+
+  .timeline-year {
+    width: 3rem;
+    color: var(--maroon);
+  }
+
+  .timeline-label {
+    font-family: var(--font-sans);
+    font-weight: 500;
+  }
+
+  .interest-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4) var(--space-6);
+    margin-top: var(--space-8);
+  }
+
+  .education-degree {
+    margin-top: var(--space-8);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .education-meta {
+    margin-top: var(--space-2);
+  }
+
+  .milestones {
+    margin-top: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 900px) {
+    .about-hero {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .about-hero h1 {
+      max-width: 12ch;
+    }
+  }
+</style>

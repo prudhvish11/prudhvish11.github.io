@@ -1,0 +1,158 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArrowLink from '../../components/global/ArrowLink.astro';
+
+const allWork = await getCollection('work');
+const byCategory = (category: string) =>
+  allWork
+    .filter((entry) => entry.data.category === category)
+    .sort((a, b) => (a.data.homepageOrder ?? 99) - (b.data.homepageOrder ?? 99));
+
+const groups = [
+  { id: 'professional', label: 'Professional', entries: byCategory('professional') },
+  { id: 'independent', label: 'Independent', entries: byCategory('independent') },
+  { id: 'research', label: 'Research', entries: byCategory('research') },
+  { id: 'personal-lab', label: 'Personal Lab', entries: byCategory('personal-lab') },
+];
+
+const archive = [
+  {
+    year: '2023',
+    name: 'Umbrella Alert',
+    tags: 'ML / Flask',
+    href: 'https://github.com/prudhvish11/Umbrella-Alert',
+  },
+];
+---
+
+<BaseLayout
+  title="Work — Prudhvish Narayanam"
+  description="Systems, products, experiments and research — professional, independent, research, and personal-lab work by Prudhvish Narayanam."
+>
+  <div class="chapter-light" data-chapter-theme="light">
+    <header class="container work-index-header">
+      <h1 class="type-chapter">WORK</h1>
+      <p class="type-support balance">Systems, products, experiments and research.</p>
+    </header>
+
+    {groups.map((group) => (
+      <section class="container work-group" aria-labelledby={`group-${group.id}`}>
+        <p id={`group-${group.id}`} class="type-meta group-label">{group.label}</p>
+        <ul class="work-list">
+          {group.entries.map((entry) => (
+            <li>
+              <a href={`/work/${entry.id}`} class="work-row">
+                <span class="row-name type-project">{entry.data.shortTitle}</span>
+                <span class="row-meta type-meta">{entry.data.period} — {entry.data.technologies.join(' / ')}</span>
+                <span class="row-arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <section class="container work-archive" aria-labelledby="archive-label">
+      <p id="archive-label" class="type-meta group-label">Archive</p>
+      <ul class="archive-list type-meta">
+        {archive.map((item) => (
+          <li>
+            <span class="archive-year">{item.year}</span>
+            <ArrowLink href={item.href} direction="external" external class="archive-name">{item.name}</ArrowLink>
+            <span class="archive-tags">{item.tags}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .work-index-header {
+    padding-top: var(--space-16);
+  }
+
+  .work-index-header .type-support {
+    margin-top: var(--space-6);
+    max-width: 40ch;
+    color: var(--stone);
+  }
+
+  .work-group {
+    padding-top: var(--space-16);
+  }
+
+  .group-label {
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .work-list {
+    margin-top: var(--space-2);
+  }
+
+  .work-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block: var(--space-6);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .row-meta {
+    color: var(--stone);
+    margin-inline-end: auto;
+    padding-inline-start: var(--space-6);
+  }
+
+  .row-arrow {
+    color: var(--maroon);
+    transition: transform var(--duration-fast) var(--ease-standard);
+  }
+
+  .work-row:hover .row-arrow,
+  .work-row:focus-visible .row-arrow {
+    transform: translateX(2px);
+  }
+
+  .work-archive {
+    padding-block: var(--space-16);
+  }
+
+  .archive-list {
+    margin-top: var(--space-2);
+  }
+
+  .archive-list li {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-6);
+    padding-block: var(--space-3);
+  }
+
+  .archive-year {
+    color: var(--stone);
+    width: 3rem;
+  }
+
+  .archive-list :global(.archive-name) {
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: var(--ink);
+  }
+
+  .archive-tags {
+    color: var(--stone);
+  }
+
+  @media (min-width: 700px) {
+    .row-name {
+      flex: none;
+      width: 16rem;
+    }
+  }
+</style>

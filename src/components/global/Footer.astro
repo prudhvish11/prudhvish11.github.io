@@ -1,0 +1,74 @@
+---
+const links = [
+  { label: 'EMAIL', href: 'mailto:prudhvish11@gmail.com', external: false },
+  { label: 'LINKEDIN', href: 'https://www.linkedin.com/in/prudhvish11/', external: true },
+  { label: 'GITHUB', href: 'https://github.com/prudhvish11', external: true },
+  { label: 'WRITING', href: '/writing', external: false },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer chapter-dark">
+  <div class="container footer-links">
+    <ul>
+      {links.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            target={link.external ? '_blank' : undefined}
+            rel={link.external ? 'noopener noreferrer' : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+  <div class="container footer-bottom">
+    <span class="mark">PN.</span>
+    <span class="copyright">© {year} Prudhvish Narayanam</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-top: var(--space-16);
+  }
+
+  .footer-links ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6) var(--space-8);
+    font-family: var(--font-mono);
+    font-size: var(--text-meta);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-bottom: var(--space-12);
+  }
+
+  .footer-links a {
+    display: inline-block;
+    padding-block: var(--space-1);
+  }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border-dark);
+    padding-block: var(--space-6);
+    font-family: var(--font-mono);
+    font-size: var(--text-meta);
+    letter-spacing: 0.06em;
+    color: var(--stone);
+  }
+
+  .footer-bottom .mark {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--warm-white);
+    letter-spacing: -0.02em;
+    text-transform: none;
+  }
+</style>

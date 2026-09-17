@@ -1,0 +1,20 @@
+---
+interface Props {
+  href: string;
+  direction?: 'external' | 'deeper' | 'down';
+  external?: boolean;
+  class?: string;
+}
+
+const { href, direction = 'deeper', external = false, class: className } = Astro.props;
+
+const glyph = { external: '↗', deeper: '→', down: '↓' }[direction];
+const rel = external ? 'noopener noreferrer' : undefined;
+const target = external ? '_blank' : undefined;
+---
+
+<a href={href} class:list={['arrow-link', className]} rel={rel} target={target}>
+  <span class="label"><slot /></span>
+  <span class="arrow-glyph" aria-hidden="true">{glyph}</span>
+  {external && <span class="visually-hidden">(opens in a new tab)</span>}
+</a>

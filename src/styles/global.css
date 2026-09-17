@@ -1,0 +1,195 @@
+/* Chapter theming — the only two visual "modes" on the site */
+.chapter-light {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.chapter-dark {
+  background: var(--near-black);
+  color: var(--warm-white);
+}
+
+.chapter-dark .type-meta {
+  color: #9A9792;
+}
+
+.chapter-light hr.rule,
+.chapter-light .hairline {
+  border-color: var(--border-light);
+}
+
+.chapter-dark hr.rule,
+.chapter-dark .hairline {
+  border-color: var(--border-dark);
+}
+
+/* Layout container */
+.container {
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter-phone);
+}
+
+@media (min-width: 700px) {
+  .container {
+    padding-inline: var(--gutter-tablet);
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    padding-inline: var(--gutter-desktop);
+  }
+}
+
+.chapter {
+  padding-block: var(--chapter-rhythm);
+}
+
+/* Section number + micro-rule motif, e.g. "02 / SELECTED WORK" */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-meta);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: var(--space-8);
+}
+
+.section-label .rule {
+  display: inline-block;
+  width: 2.5rem;
+  height: 1px;
+  background: var(--maroon);
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  z-index: var(--z-skip-link);
+  background: var(--maroon);
+  color: var(--warm-white);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  transition: top var(--duration-fast) var(--ease-standard);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+/* Focus visibility — never suppressed */
+:focus-visible {
+  outline: 2px solid var(--maroon);
+  outline-offset: 3px;
+}
+
+.chapter-dark :focus-visible {
+  outline-color: var(--warm-white);
+}
+
+/* Directional arrow link — the single recurring interactive motif */
+.arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  text-underline-offset: 0.2em;
+}
+
+.arrow-link .arrow-glyph {
+  display: inline-block;
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.arrow-link:hover .arrow-glyph,
+.arrow-link:focus-visible .arrow-glyph {
+  transform: translate(2px, -2px);
+}
+
+/* Circle CTA (hero "Explore my work") */
+.cta-circle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.cta-circle .circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  transition:
+    background-color var(--duration-medium) var(--ease-standard),
+    color var(--duration-medium) var(--ease-standard);
+}
+
+.cta-circle .circle svg {
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.cta-circle:hover .circle,
+.cta-circle:focus-visible .circle {
+  background: var(--near-black);
+  color: var(--warm-white);
+}
+
+.cta-circle:hover .circle svg,
+.cta-circle:focus-visible .circle svg {
+  transform: translate(2px, -2px);
+}
+
+.chapter-dark .cta-circle:hover .circle,
+.chapter-dark .cta-circle:focus-visible .circle {
+  background: var(--warm-white);
+  color: var(--near-black);
+}
+
+.cta-circle:hover .label,
+.cta-circle:focus-visible .label {
+  transform: translateX(2px);
+}
+
+.cta-circle .label {
+  display: inline-block;
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+/* Visually hidden but accessible */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Render below-the-fold chapters cheaply until scrolled near */
+.render-contained {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+img,
+svg.diagram {
+  max-width: 100%;
+  height: auto;
+}

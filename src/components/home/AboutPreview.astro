@@ -1,0 +1,117 @@
+---
+import { Image } from 'astro:assets';
+import SectionLabel from '../global/SectionLabel.astro';
+import ArrowLink from '../global/ArrowLink.astro';
+import mainPhoto from '../../assets/photos/about_track_night_portrait_original.jpeg';
+import supportingPhoto from '../../assets/photos/beyond_track_smile_original.jpeg';
+import travelPhoto from '../../assets/photos/beyond_mountain_water_original.jpeg';
+
+const interests = ['WRITING', 'BADMINTON', 'FITNESS', 'TRAVEL', 'LEARNING'];
+---
+
+<section class="chapter chapter-light render-contained" data-chapter-theme="light" aria-labelledby="about-heading">
+  <div class="container">
+    <SectionLabel number="08" label="ABOUT / BEYOND CODE" />
+
+    <div class="about-copy">
+      <h2 id="about-heading" class="type-chapter balance">BEYOND<br />THE CODE.</h2>
+      <p class="type-support">
+        I like building things, understanding how they work, and keeping enough space outside work to stay curious.
+      </p>
+      <p class="type-body about-secondary">
+        Writing, badminton, fitness, travel and learning usually fill that space.
+      </p>
+
+      <ul class="interest-list">
+        {interests.map((interest) => (
+          <li class="type-meta">{interest}</li>
+        ))}
+      </ul>
+
+      <ArrowLink href="/about" direction="deeper" class="about-more">More about me</ArrowLink>
+    </div>
+
+    <div class="about-collage">
+      <figure class="media-frame collage-main">
+        <Image src={mainPhoto} alt="Prudhvish at a go-kart track at night, looking back over his shoulder" widths={[480, 768, 1024]} sizes="(min-width: 900px) 40vw, 80vw" loading="lazy" />
+      </figure>
+      <figure class="media-frame collage-supporting">
+        <Image src={supportingPhoto} alt="Prudhvish smiling, holding a racing helmet at the track" widths={[400, 600]} sizes="(min-width: 900px) 22vw, 55vw" loading="lazy" />
+      </figure>
+      <figure class="media-frame collage-travel">
+        <Image src={travelPhoto} alt="Prudhvish standing barefoot on a glass deck overlooking a lake and mountains" widths={[400, 600]} sizes="(min-width: 900px) 22vw, 55vw" loading="lazy" />
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-secondary {
+    margin-top: var(--space-4);
+    color: var(--stone);
+  }
+
+  .interest-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4) var(--space-6);
+    margin-top: var(--space-8);
+  }
+
+  .about-more {
+    margin-top: var(--space-8);
+  }
+
+  .about-collage {
+    margin-top: var(--space-16);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .collage-main {
+    grid-column: 1 / -1;
+    aspect-ratio: 3 / 4;
+  }
+
+  .collage-main :global(img) {
+    object-position: 80% 30%;
+  }
+
+  .collage-supporting :global(img) {
+    object-position: 55% 25%;
+  }
+
+  .collage-travel :global(img) {
+    object-position: 45% 15%;
+  }
+
+  .collage-supporting,
+  .collage-travel {
+    aspect-ratio: 3 / 4;
+  }
+
+  @media (min-width: 900px) {
+    .about-copy {
+      max-width: 46ch;
+    }
+
+    .about-collage {
+      grid-template-columns: repeat(4, 1fr);
+      align-items: end;
+    }
+
+    .collage-main {
+      grid-column: 1 / 3;
+      aspect-ratio: 4 / 5;
+    }
+
+    .collage-supporting {
+      grid-column: 3 / 4;
+    }
+
+    .collage-travel {
+      grid-column: 4 / 5;
+    }
+  }
+</style>

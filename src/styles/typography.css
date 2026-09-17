@@ -1,0 +1,92 @@
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  color: var(--ink);
+  background: var(--paper);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+p {
+  max-width: var(--reading-max);
+}
+
+/* Hero / name-scale display type */
+.type-hero {
+  font-family: var(--font-sans);
+  font-size: var(--text-hero);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+}
+
+.type-hero .is-strong,
+.type-hero .is-light {
+  display: block;
+}
+
+.type-hero .is-light {
+  font-weight: 500;
+}
+
+/* Major chapter titles */
+.type-chapter {
+  font-family: var(--font-sans);
+  font-size: var(--text-chapter);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  font-weight: 650;
+}
+
+/* Editorial serif — selective use only */
+.type-serif {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+/* Project / section headline */
+.type-project {
+  font-family: var(--font-sans);
+  font-size: var(--text-project);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+/* Large supporting copy */
+.type-support {
+  font-size: var(--text-support);
+  line-height: 1.35;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Body copy */
+.type-body {
+  font-size: var(--text-body);
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* Uppercase metadata */
+.type-meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-meta);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+.type-meta strong {
+  color: inherit;
+  font-weight: 600;
+}

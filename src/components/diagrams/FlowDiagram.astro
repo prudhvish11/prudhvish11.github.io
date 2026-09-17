@@ -1,0 +1,46 @@
+---
+interface Props {
+  steps: string[];
+  class?: string;
+}
+
+const { steps, class: className } = Astro.props;
+---
+
+<ol class:list={['flow-diagram', className]}>
+  {steps.map((step, i) => (
+    <li>
+      <span class="step-label">{step}</span>
+      {i < steps.length - 1 && <span class="step-arrow" aria-hidden="true">↓</span>}
+    </li>
+  ))}
+</ol>
+
+<style>
+  .flow-diagram {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-mono);
+    font-size: var(--text-meta);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .flow-diagram li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .step-label {
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid currentColor;
+    opacity: 0.85;
+  }
+
+  .step-arrow {
+    padding-block: var(--space-1);
+    padding-inline-start: var(--space-6);
+    color: var(--maroon);
+  }
+</style>

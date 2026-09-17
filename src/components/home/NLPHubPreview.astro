@@ -1,0 +1,80 @@
+---
+import { getEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import ArrowLink from '../global/ArrowLink.astro';
+import NlpHubDiagram from '../diagrams/NlpHubDiagram.astro';
+import screenshot from '../../assets/projects/nlp-hub/nlp-hub-landing.png';
+
+const nlpHub = await getEntry('work', 'nlp-hub');
+---
+
+<section class="chapter chapter-dark render-contained nlp-section" data-chapter-theme="dark" aria-labelledby="nlp-heading">
+  <div class="container nlp-grid">
+    <div class="nlp-copy">
+      <p class="type-meta">{nlpHub?.data.labels.join(' / ')}</p>
+      <h2 id="nlp-heading" class="type-project nlp-title">NLP<br />HUB.</h2>
+      <p class="type-support">One interface. Multiple language tools.</p>
+      <p class="type-meta nlp-tech">{nlpHub?.data.technologies.join(' / ')} — {nlpHub?.data.period}</p>
+      <p class="type-body nlp-desc">{nlpHub?.data.summary}</p>
+      <div class="nlp-links">
+        <ArrowLink href={nlpHub?.data.externalUrl ?? '#'} direction="external" external>View live</ArrowLink>
+        <ArrowLink href="/work/nlp-hub" direction="deeper">Case study</ArrowLink>
+      </div>
+    </div>
+
+    <div class="nlp-visual">
+      <NlpHubDiagram />
+      <figure class="nlp-shot media-frame">
+        <Image src={screenshot} alt="NLP Hub's deployed interface, listing its five language tools" widths={[480, 768]} sizes="(min-width: 900px) 40vw, 90vw" loading="lazy" />
+        <figcaption class="type-meta">Original deployed interface · 2022</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .nlp-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+
+  .nlp-title {
+    color: var(--warm-white);
+    margin-top: var(--space-4);
+  }
+
+  .nlp-tech {
+    margin-top: var(--space-4);
+  }
+
+  .nlp-desc {
+    color: var(--stone);
+    max-width: 48ch;
+    margin-top: var(--space-6);
+  }
+
+  .nlp-links {
+    display: flex;
+    gap: var(--space-8);
+    margin-top: var(--space-8);
+  }
+
+  .nlp-visual {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .nlp-shot figcaption {
+    margin-top: var(--space-3);
+    color: var(--stone);
+  }
+
+  @media (min-width: 900px) {
+    .nlp-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+  }
+</style>

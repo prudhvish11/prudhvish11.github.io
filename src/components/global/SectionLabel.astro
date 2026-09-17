@@ -1,0 +1,15 @@
+---
+interface Props {
+  number: string;
+  label: string;
+  as?: 'p' | 'h2';
+}
+
+const { number, label, as: Tag = 'p' } = Astro.props;
+---
+
+<Tag class="section-label">
+  <span aria-hidden="true">{number} /</span>
+  <span>{label}</span>
+  <span class="rule" aria-hidden="true"></span>
+</Tag>

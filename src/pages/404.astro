@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArrowLink from '../components/global/ArrowLink.astro';
+---
+
+<BaseLayout title="Page not found — Prudhvish Narayanam" description="This page doesn't exist." noIndex>
+  <div class="chapter-dark not-found" data-chapter-theme="dark">
+    <div class="container">
+      <p class="type-meta">404</p>
+      <h1 class="type-chapter balance">THIS PAGE<br />DOESN'T EXIST.</h1>
+      <ArrowLink href="/" direction="deeper" class="home-link">Back home</ArrowLink>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: 70svh;
+    display: flex;
+    align-items: center;
+  }
+
+  .not-found .container {
+    padding-block: var(--space-16);
+  }
+
+  .home-link {
+    margin-top: var(--space-8);
+  }
+</style>

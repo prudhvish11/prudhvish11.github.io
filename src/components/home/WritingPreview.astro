@@ -1,0 +1,123 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import SectionLabel from '../global/SectionLabel.astro';
+import ArrowLink from '../global/ArrowLink.astro';
+import silhouette from '../../assets/photos/writing_silhouette_original.jpeg';
+
+const allPosts = await getCollection('writing');
+const posts = allPosts
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
+  .slice(0, 4);
+---
+
+<section class="chapter chapter-light render-contained" data-chapter-theme="light" aria-labelledby="writing-heading">
+  <div class="container">
+    <SectionLabel number="06" label="WRITING" />
+
+    <div class="writing-intro">
+      <h2 id="writing-heading" class="type-chapter">REASONS<br />WHY?</h2>
+      <p class="type-support writing-copy">I write when a question interests me enough to keep digging.</p>
+    </div>
+
+    <figure class="writing-photo media-frame">
+      <Image
+        src={silhouette}
+        alt="Silhouette looking out over a hazy horizon at dusk"
+        widths={[768, 1024, 1440]}
+        sizes="90vw"
+        loading="lazy"
+      />
+    </figure>
+
+    <ol class="writing-list">
+      {posts.map((post, i) => (
+        <li>
+          <a href={post.data.externalUrl ?? `/writing/${post.id}`} class="writing-row" target={post.data.externalUrl ? '_blank' : undefined} rel={post.data.externalUrl ? 'noopener noreferrer' : undefined}>
+            <span class="row-index type-meta">{String(i + 1).padStart(2, '0')}</span>
+            <span class="row-title">{post.data.title}</span>
+            <span class="row-meta type-meta">{post.data.categories.join(' / ')}</span>
+            <span class="row-read type-meta">READ ↗</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+
+    <ArrowLink href="/writing" direction="deeper" class="writing-more">All writing</ArrowLink>
+  </div>
+</section>
+
+<style>
+  .writing-copy {
+    margin-top: var(--space-4);
+    max-width: 36ch;
+    color: var(--stone);
+  }
+
+  .writing-photo {
+    margin-top: var(--space-12);
+    aspect-ratio: 16 / 7;
+  }
+
+  .writing-photo :global(img) {
+    object-position: 35% 55%;
+  }
+
+  .writing-list {
+    margin-top: var(--space-12);
+    border-top: 1px solid var(--border-light);
+  }
+
+  .writing-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      'index title title'
+      '. meta read';
+    align-items: baseline;
+    gap: var(--space-1) var(--space-4);
+    padding-block: var(--space-6);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .row-index {
+    grid-area: index;
+    color: var(--maroon);
+  }
+
+  .row-title {
+    grid-area: title;
+    font-family: var(--font-sans);
+    font-size: clamp(1.15rem, 1rem + 1vw, 1.6rem);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .row-meta {
+    grid-area: meta;
+    color: var(--stone);
+  }
+
+  .row-read {
+    grid-area: read;
+    color: var(--maroon);
+    transition: transform var(--duration-fast) var(--ease-standard);
+  }
+
+  .writing-row:hover .row-read,
+  .writing-row:focus-visible .row-read {
+    transform: translate(2px, -2px);
+  }
+
+  .writing-more {
+    display: inline-flex;
+    margin-top: var(--space-8);
+  }
+
+  @media (min-width: 700px) {
+    .writing-row {
+      grid-template-columns: 3rem 1fr auto auto;
+      grid-template-areas: 'index title meta read';
+    }
+  }
+</style>

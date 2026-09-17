@@ -1,0 +1,195 @@
+---
+import { existsSync } from 'node:fs';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArrowLink from '../components/global/ArrowLink.astro';
+
+const resumePdfPath = '/resume/resume-approved.pdf';
+const hasResumePdf = existsSync(new URL('../../public/resume/resume-approved.pdf', import.meta.url));
+
+const experience = [
+  {
+    role: 'Analyst',
+    org: 'Accenture',
+    period: '2025 — Now',
+    points: [
+      'Production Android software deployed across 15,000+ enterprise transit devices.',
+      'Repository-aware RAG workflow for internal code intelligence, built in Python over Azure DevOps.',
+    ],
+  },
+  {
+    role: 'Associate',
+    org: 'Accenture',
+    period: '2024 — 2025',
+    points: ['Cloud-integrated synchronization and distributed-data consistency work for the same Android platform.'],
+  },
+  {
+    role: 'Intern',
+    org: 'Accenture',
+    period: '2024',
+    points: ['Computer vision work using YOLOv8 and EasyOCR, with edge deployment via TensorFlow Lite on Android.'],
+  },
+];
+
+const skills = [
+  { label: 'Languages', value: 'Java, Python, SQL' },
+  { label: 'Backend', value: 'FastAPI, Flask, REST' },
+  { label: 'AI', value: 'RAG, NLP, ML, Computer Vision' },
+  { label: 'Tools', value: 'Git, Docker, Azure DevOps, Android Studio' },
+];
+---
+
+<BaseLayout
+  title="Resume — Prudhvish Narayanam"
+  description="Software engineer in Bengaluru, India — experience, skills, and education for Prudhvish Narayanam."
+>
+  <div class="chapter-light" data-chapter-theme="light">
+    <header class="container resume-header">
+      <h1 class="type-chapter">RESUME</h1>
+      <p class="type-support">Software Engineer</p>
+      <p class="type-meta">BENGALURU, INDIA</p>
+
+      {hasResumePdf ? (
+        <div class="resume-actions">
+          <ArrowLink href={resumePdfPath} direction="external" external>View resume</ArrowLink>
+          <a href={resumePdfPath} download class="arrow-link">
+            <span class="label">Download PDF</span>
+            <span class="arrow-glyph" aria-hidden="true">↓</span>
+          </a>
+        </div>
+      ) : (
+        <p class="type-meta resume-pending">Downloadable PDF coming soon — see the summary below.</p>
+      )}
+    </header>
+
+    <section class="container resume-section" aria-labelledby="experience-heading">
+      <p class="type-meta" id="experience-heading">EXPERIENCE</p>
+      <ol class="experience-list">
+        {experience.map((job) => (
+          <li>
+            <div class="job-head">
+              <p class="job-role">{job.role} <span class="job-org">· {job.org}</span></p>
+              <p class="type-meta">{job.period}</p>
+            </div>
+            <ul class="job-points">
+              {job.points.map((point) => <li>{point}</li>)}
+            </ul>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="container resume-section" aria-labelledby="skills-heading">
+      <p class="type-meta" id="skills-heading">SKILLS</p>
+      <div class="skills-grid">
+        {skills.map((skill) => (
+          <div>
+            <p class="type-meta">{skill.label}</p>
+            <p class="skill-value">{skill.value}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="container resume-section resume-section--last" aria-labelledby="education-heading">
+      <p class="type-meta" id="education-heading">EDUCATION</p>
+      <p class="job-role">B.Tech — Computer Science</p>
+      <p class="type-body">Kalasalingam Academy of Research and Education</p>
+      <p class="type-meta">2020 – 2024 · CGPA 9.15</p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .resume-header {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-12);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .resume-header .type-support {
+    margin-top: var(--space-4);
+  }
+
+  .resume-header .type-meta {
+    margin-top: var(--space-2);
+  }
+
+  .resume-actions {
+    display: flex;
+    gap: var(--space-8);
+    margin-top: var(--space-8);
+  }
+
+  .resume-pending {
+    margin-top: var(--space-8);
+    color: var(--stone);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .resume-section {
+    padding-block: var(--space-12);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .resume-section--last {
+    border-bottom: none;
+    padding-bottom: var(--space-24);
+  }
+
+  .experience-list {
+    margin-top: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .job-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-4);
+  }
+
+  .job-role {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .job-org {
+    font-weight: 400;
+    color: var(--stone);
+  }
+
+  .job-points {
+    margin-top: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-left: 1.1em;
+  }
+
+  .job-points li {
+    list-style: disc;
+    color: var(--ink);
+    max-width: 62ch;
+  }
+
+  .skills-grid {
+    margin-top: var(--space-8);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .skill-value {
+    margin-top: var(--space-2);
+  }
+
+  @media (min-width: 700px) {
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,133 @@
+---
+import SectionLabel from '../global/SectionLabel.astro';
+import SystemsMap from '../diagrams/SystemsMap.astro';
+
+const skills = [
+  { label: 'LANGUAGES', value: 'Java / Python / SQL' },
+  { label: 'BACKEND', value: 'FastAPI / Flask / REST' },
+  { label: 'AI', value: 'RAG / NLP / ML / Computer Vision' },
+  { label: 'TOOLS', value: 'Git / Docker / Azure DevOps / Android Studio' },
+];
+
+const roles = [
+  { title: 'Intern', period: '2024' },
+  { title: 'Associate', period: '2024 — 2025' },
+  { title: 'Analyst', period: '2025 — Now' },
+];
+---
+
+<section class="chapter chapter-dark render-contained" data-chapter-theme="dark" aria-labelledby="systems-heading">
+  <div class="container">
+    <SectionLabel number="07" label="ENGINEERING + EXPERIENCE" />
+
+    <h2 id="systems-heading" class="type-chapter balance">SYSTEMS<br />OVER<br />BUZZWORDS.</h2>
+    <p class="type-support systems-intro">
+      I work across mobile, backend and intelligent systems — usually where data has to move reliably between them.
+    </p>
+
+    <div class="systems-map-wrap">
+      <SystemsMap />
+    </div>
+
+    <div class="skills-grid">
+      {skills.map((skill) => (
+        <div class="skill-block">
+          <p class="type-meta">{skill.label}</p>
+          <p class="skill-value">{skill.value}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="experience-track" role="list" aria-label="Career progression at Accenture">
+      <p class="type-meta track-years"><span>2024</span><span>NOW</span></p>
+      <div class="track-line" aria-hidden="true"></div>
+      <ol class="track-roles">
+        {roles.map((role) => (
+          <li role="listitem">
+            <p class="role-title">{role.title}</p>
+            <p class="type-meta">{role.period}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="type-meta track-company">ACCENTURE</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .systems-intro {
+    max-width: 46ch;
+    margin-top: var(--space-6);
+    color: var(--stone);
+  }
+
+  .systems-map-wrap {
+    margin-top: var(--space-16);
+    padding-block: var(--space-8);
+  }
+
+  .skills-grid {
+    margin-top: var(--space-16);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    border-top: 1px solid var(--border-dark);
+    padding-top: var(--space-8);
+  }
+
+  .skill-value {
+    margin-top: var(--space-2);
+    font-size: 1.1rem;
+    color: var(--warm-white);
+  }
+
+  .experience-track {
+    margin-top: var(--space-24);
+  }
+
+  .track-years {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .track-line {
+    height: 1px;
+    background: var(--border-dark);
+    margin-block: var(--space-4);
+  }
+
+  .track-roles {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .role-title {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--warm-white);
+  }
+
+  .track-company {
+    margin-top: var(--space-6);
+    text-align: center;
+  }
+
+  @media (min-width: 700px) {
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 900px) {
+    .skills-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .track-roles {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+</style>

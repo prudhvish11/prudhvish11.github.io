@@ -1,0 +1,63 @@
+---
+const groups = [
+  { name: 'UNDERSTAND', items: ['Sentiment Analyzer', 'Spam Classifier'] },
+  { name: 'TRANSFORM', items: ['Spell Corrector'] },
+  { name: 'SPEAK', items: ['Text to Speech', 'Speech to Text'] },
+];
+---
+
+<div class="module-map">
+  <p class="hub-label">NLP HUB</p>
+  <div class="hub-rule" aria-hidden="true"></div>
+  <div class="groups">
+    {groups.map((group) => (
+      <div class="group">
+        <p class="group-name">{group.name}</p>
+        <ul>
+          {group.items.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .module-map {
+    font-family: var(--font-mono);
+  }
+
+  .hub-label {
+    font-size: var(--text-meta);
+    letter-spacing: 0.08em;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .hub-rule {
+    height: 1px;
+    background: var(--maroon);
+    margin-block: var(--space-4);
+  }
+
+  .groups {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    text-align: center;
+  }
+
+  .group-name {
+    font-size: var(--text-meta);
+    letter-spacing: 0.06em;
+    color: var(--maroon);
+    margin-bottom: var(--space-3);
+  }
+
+  .group ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    font-size: 0.75rem;
+    color: var(--stone);
+  }
+</style>

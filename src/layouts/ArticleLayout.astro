@@ -1,0 +1,76 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ArrowLink from '../components/global/ArrowLink.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'writing'>;
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+---
+
+<BaseLayout title={`${data.title} — Prudhvish Narayanam`} description={data.seoDescription}>
+  <article class="chapter-light article" data-chapter-theme="light">
+    <header class="container article-header">
+      <p class="type-meta"><a href="/writing">WRITING</a> / {data.categories.join(' / ')}</p>
+      <h1 class="type-chapter balance">{data.title}</h1>
+      <p class="type-meta article-date">
+        {data.publishedAt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        {data.readingMinutes && ` · ${data.readingMinutes} min read`}
+      </p>
+    </header>
+
+    <div class="container article-body">
+      <slot />
+    </div>
+
+    <div class="container article-footer">
+      <ArrowLink href="/writing" direction="deeper">All writing</ArrowLink>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-header {
+    padding-top: var(--space-16);
+    max-width: var(--reading-max);
+  }
+
+  .article-header a {
+    color: var(--maroon);
+  }
+
+  .article-date {
+    margin-top: var(--space-6);
+  }
+
+  .article-body {
+    padding-block: var(--space-12);
+    max-width: var(--reading-max);
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+
+  .article-body :global(p) {
+    margin-top: var(--space-6);
+  }
+
+  .article-body :global(h2) {
+    margin-top: var(--space-12);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .article-footer {
+    padding-bottom: var(--space-16);
+    max-width: var(--reading-max);
+  }
+
+  @media (min-width: 900px) {
+    .article-body {
+      font-size: 1.25rem;
+    }
+  }
+</style>

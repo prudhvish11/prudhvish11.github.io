@@ -1,0 +1,204 @@
+---
+const nodes = [
+  {
+    id: 'ai',
+    label: 'AI / RAG',
+    area: 'ai',
+    detail: 'Retrieval, embeddings, NLP and computer vision — where the system reasons over unstructured context.',
+  },
+  {
+    id: 'mobile',
+    label: 'MOBILE',
+    area: 'mobile',
+    detail: 'Android and enterprise applications, built for REST integration and edge devices in the field.',
+  },
+  {
+    id: 'backend',
+    label: 'BACKEND',
+    area: 'backend',
+    detail: 'Python services — FastAPI and Flask — exposing REST APIs backed by SQL.',
+  },
+  {
+    id: 'data',
+    label: 'DATA',
+    area: 'data',
+    detail: 'Integration and consistency work: making sure the same data means the same thing everywhere it moves.',
+  },
+];
+---
+
+<div class="systems-map" data-engineering-map>
+  <div class="map-diagram" role="group" aria-label="Systems map — select an area to read more">
+    <span class="node center" aria-hidden="true">SYSTEMS</span>
+    {nodes.map((node) => (
+      <button
+        type="button"
+        class={`node node-${node.area}`}
+        data-map-node={node.id}
+        aria-pressed="false"
+      >
+        {node.label}
+      </button>
+    ))}
+  </div>
+
+  <div class="map-panels">
+    {nodes.map((node) => (
+      <p class="panel" data-map-panel={node.id}>{node.detail}</p>
+    ))}
+  </div>
+
+  <ul class="map-stacked">
+    {nodes.map((node) => (
+      <li>
+        <p class="stacked-label">{node.label}</p>
+        <p class="stacked-detail">{node.detail}</p>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .map-diagram {
+    display: none;
+  }
+
+  @media (min-width: 700px) {
+    .systems-map {
+      display: grid;
+      gap: var(--space-12);
+    }
+
+    .map-diagram {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 9rem));
+      grid-template-rows: repeat(3, 4.5rem);
+      grid-template-areas:
+        '. ai .'
+        'mobile center backend'
+        '. data .';
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .map-diagram::before,
+    .map-diagram::after {
+      content: '';
+      position: absolute;
+      background: var(--border-dark);
+    }
+
+    .map-diagram::before {
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      transform: translateX(-50%);
+    }
+
+    .map-diagram::after {
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      transform: translateY(-50%);
+    }
+
+    .node {
+      position: relative;
+      z-index: 1;
+      justify-self: center;
+      font-family: var(--font-mono);
+      font-size: var(--text-meta);
+      letter-spacing: 0.06em;
+      padding: var(--space-3) var(--space-4);
+      background: var(--near-black);
+      border: 1px solid var(--border-dark);
+      color: var(--warm-white);
+    }
+
+    .node.center {
+      grid-area: center;
+      color: var(--maroon);
+      border-color: var(--maroon);
+    }
+
+    .node-ai {
+      grid-area: ai;
+    }
+    .node-mobile {
+      grid-area: mobile;
+    }
+    .node-backend {
+      grid-area: backend;
+    }
+    .node-data {
+      grid-area: data;
+    }
+
+    button.node {
+      cursor: pointer;
+      transition:
+        background-color var(--duration-fast) var(--ease-standard),
+        color var(--duration-fast) var(--ease-standard);
+    }
+
+    button.node:hover,
+    button.node:focus-visible,
+    button.node.is-active {
+      background: var(--maroon);
+      border-color: var(--maroon);
+      color: var(--warm-white);
+    }
+
+    .map-panels {
+      min-height: 3.5rem;
+      max-width: 46ch;
+      margin-inline: auto;
+      text-align: center;
+      color: var(--stone);
+    }
+
+    .panel {
+      display: none;
+    }
+
+    .panel.is-active {
+      display: block;
+    }
+
+    .map-stacked {
+      display: none;
+    }
+  }
+
+  @media (max-width: 699px) {
+    .map-panels {
+      display: none;
+    }
+
+    .map-stacked {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .stacked-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-meta);
+      letter-spacing: 0.08em;
+      color: var(--maroon);
+      margin-bottom: var(--space-2);
+    }
+
+    .stacked-detail {
+      color: var(--stone);
+      max-width: 42ch;
+    }
+  }
+</style>
+
+<script>
+  import '../../scripts/engineering-map';
+</script>

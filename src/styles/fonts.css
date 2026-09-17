@@ -1,0 +1,8 @@
+/* Self-hosted subsets — only the weights the type system actually uses. */
+@import '@fontsource/geist-sans/latin-400.css';
+@import '@fontsource/geist-sans/latin-500.css';
+@import '@fontsource/geist-sans/latin-700.css';
+
+@import '@fontsource/newsreader/latin-400.css';
+@import '@fontsource/newsreader/latin-400-italic.css';
+@import '@fontsource/newsreader/latin-500.css';

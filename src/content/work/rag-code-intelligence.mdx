@@ -1,0 +1,31 @@
+---
+name: "RAG Code Intelligence"
+shortTitle: "RAG Code Intelligence"
+category: "professional"
+period: "2026"
+status: "Internal Production Tool"
+summary: "A Python-based retrieval-augmented generation workflow that gives repository context to code analysis — built for internal use over Azure DevOps repositories."
+homepageSummary: "repository-aware code intelligence"
+technologies: ["Python", "RAG", "Embeddings", "Azure DevOps"]
+labels: ["Professional", "Intelligent Systems"]
+featured: true
+homepageOrder: 2
+visualType: "retrieval-graph"
+confidentialityNote: "Public-safe overview only. Internal architecture, endpoints, and client-specific implementation details are not disclosed."
+seoTitle: "RAG Code Intelligence — Prudhvish Narayanam"
+seoDescription: "A repository-aware retrieval-augmented generation workflow for code understanding, built in Python over Azure DevOps repositories."
+---
+
+Large codebases are hard for any model — human or machine — to reason about without context. This is a retrieval-augmented generation workflow built to give code analysis actual repository context instead of guessing from a single file.
+
+## Retrieval, not generation-first
+
+A query doesn't go straight to a model. It's routed through semantic retrieval first: embeddings represent the repository's files and structure, and relevant context is pulled from across the repository before any analysis happens.
+
+## Context construction
+
+Retrieved fragments are assembled into a coherent context window — the part of this system that determines whether the eventual analysis is grounded in the real repository or not. Getting this step right matters more than the model call that follows it.
+
+## Where it runs
+
+The workflow integrates directly with Azure DevOps repositories as an internal engineering tool. It's professional/internal innovation — the description here stays at the level already appropriate for public discussion, without exposing internal endpoints or repository contents.

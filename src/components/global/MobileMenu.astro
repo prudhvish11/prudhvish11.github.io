@@ -1,0 +1,163 @@
+---
+const navItems = [
+  { number: '01', label: 'WORK', href: '/work' },
+  { number: '02', label: 'WRITING', href: '/writing' },
+  { number: '03', label: 'ABOUT', href: '/about' },
+  { number: '04', label: 'RESUME', href: '/resume' },
+];
+
+const socials = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/prudhvish11/' },
+  { label: 'GitHub', href: 'https://github.com/prudhvish11' },
+  { label: 'Email', href: 'mailto:prudhvish11@gmail.com' },
+];
+---
+
+<dialog id="mobile-menu" class="mobile-menu" data-mobile-menu aria-label="Primary">
+  <div class="menu-top">
+    <span class="mark">PN.</span>
+    <button type="button" class="close-trigger" data-menu-close>
+      <span class="visually-hidden">Close menu</span>
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+
+  <nav class="menu-nav">
+    <ul>
+      {navItems.map((item) => (
+        <li>
+          <a href={item.href}>
+            <span class="menu-number" aria-hidden="true">{item.number}</span>
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <hr class="rule hairline" />
+
+  <ul class="menu-socials">
+    {socials.map((social) => (
+      <li>
+        <a href={social.href} target={social.href.startsWith('http') ? '_blank' : undefined} rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
+          {social.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</dialog>
+
+<style>
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .mobile-menu::backdrop {
+    background: transparent;
+  }
+
+  .mobile-menu[open] {
+    display: flex;
+    flex-direction: column;
+    animation: menu-in var(--duration-nav) var(--ease-standard);
+  }
+
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-menu[open] {
+      animation: none;
+    }
+  }
+
+  .menu-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-6) var(--gutter-phone);
+    height: 4.25rem;
+  }
+
+  .menu-top .mark {
+    font-weight: 700;
+    font-size: 1.125rem;
+  }
+
+  .close-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+  }
+
+  .menu-nav {
+    padding: var(--space-8) var(--gutter-phone);
+  }
+
+  .menu-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .menu-nav a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-4);
+    font-family: var(--font-sans);
+    font-size: clamp(1.75rem, 1.4rem + 3vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .menu-number {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--maroon);
+  }
+
+  .rule.hairline {
+    border: 0;
+    border-top: 1px solid var(--border-light);
+    margin-inline: var(--gutter-phone);
+  }
+
+  .menu-socials {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-8) var(--gutter-phone);
+    font-family: var(--font-mono);
+    font-size: var(--text-meta);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .menu-socials a {
+    display: inline-block;
+    padding-block: var(--space-1);
+  }
+</style>
