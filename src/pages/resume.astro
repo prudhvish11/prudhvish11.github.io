@@ -1,10 +1,11 @@
 ---
 import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArrowLink from '../components/global/ArrowLink.astro';
 
 const resumePdfPath = '/resume/resume-approved.pdf';
-const hasResumePdf = existsSync(new URL('../../public/resume/resume-approved.pdf', import.meta.url));
+const hasResumePdf = existsSync(join(process.cwd(), 'public/resume/resume-approved.pdf'));
 
 const experience = [
   {
