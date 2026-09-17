@@ -61,6 +61,15 @@ const rag = await getEntry('work', 'rag-code-intelligence');
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+    transition:
+      transform var(--duration-medium) var(--ease-standard),
+      border-color var(--duration-medium) var(--ease-standard);
+  }
+
+  .work-card:hover,
+  .work-card:focus-within {
+    transform: scale(1.015);
+    border-color: var(--maroon);
   }
 
   .scale-number {

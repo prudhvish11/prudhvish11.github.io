@@ -95,6 +95,12 @@ const lifeosCropImg = await getImage({ src: lifeosCrop, widths: [400, 600], form
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+    transition: transform var(--duration-medium) var(--ease-standard);
+  }
+
+  .lab-card:hover,
+  .lab-card:focus-within {
+    transform: scale(1.015);
   }
 
   .lab-card--lifeos {

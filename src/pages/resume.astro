@@ -11,31 +11,62 @@ const experience = [
   {
     role: 'Analyst',
     org: 'Accenture',
-    period: '2025 — Now',
+    note: 'Promoted from Associate',
+    period: 'Oct 2024 — Present',
+    location: 'Bengaluru, Karnataka',
     points: [
-      'Production Android software deployed across 15,000+ enterprise transit devices.',
-      'Repository-aware RAG workflow for internal code intelligence, built in Python over Azure DevOps.',
+      'Modernized enterprise Android software deployed across 15,000+ transit devices by redesigning cloud-integrated data retrieval workflows, improving scalability, maintainability, and reliability of edge-to-cloud communication.',
+      'Designed and implemented REST API integrations between edge devices and cloud services, and debugged production issues involving API synchronization, distributed data consistency, and backend communication.',
+      'Migrated transit card and ticket data retrieval from on-device storage to a secure cloud-based backend, enabling real-time analytics and contributing to a 12% improvement in sales outcomes.',
+      'Developed an internal Retrieval-Augmented Generation (RAG) solution for contextual code understanding across enterprise repositories using Python, semantic retrieval, embeddings, and LLM inference.',
+      'Integrated Azure DevOps repositories with semantic search and designed retrieval pipelines to construct relevant context for LLM-powered code analysis.',
     ],
   },
   {
-    role: 'Associate',
+    role: 'Software Engineer Intern',
     org: 'Accenture',
-    period: '2024 — 2025',
-    points: ['Cloud-integrated synchronization and distributed-data consistency work for the same Android platform.'],
-  },
-  {
-    role: 'Intern',
-    org: 'Accenture',
-    period: '2024',
-    points: ['Computer vision work using YOLOv8 and EasyOCR, with edge deployment via TensorFlow Lite on Android.'],
+    period: 'Mar 2024 — Jun 2024',
+    location: 'Bengaluru, Karnataka',
+    points: [
+      'Built a computer vision pipeline using YOLOv8 and EasyOCR to automate defect detection in transit devices.',
+      'Achieved 88% mAP in object detection and 93% OCR accuracy while reducing manual diagnostics effort by 70%.',
+      'Developed Python-based data processing pipelines for computer vision workflows and optimized TensorFlow Lite models for deployment on Android edge devices.',
+    ],
   },
 ];
 
 const skills = [
   { label: 'Languages', value: 'Java, Python, SQL' },
-  { label: 'Backend', value: 'FastAPI, Flask, REST' },
-  { label: 'AI', value: 'RAG, NLP, ML, Computer Vision' },
-  { label: 'Tools', value: 'Git, Docker, Azure DevOps, Android Studio' },
+  { label: 'Core CS', value: 'Data Structures & Algorithms, OOP, Computer Networks, System Design' },
+  { label: 'Software Engineering', value: 'REST APIs, API Integration, Debugging, Software Testing' },
+  { label: 'AI & Machine Learning', value: 'RAG, LangChain, Machine Learning, NLP, Computer Vision' },
+  { label: 'Backend & Databases', value: 'FastAPI, Flask, MySQL' },
+  { label: 'Tools', value: 'Git, Docker, Azure DevOps, Android Studio, Postman, Ollama' },
+];
+
+const projects = [
+  {
+    name: 'NLP Hub',
+    period: '2022',
+    tags: 'Python, Flask, NLP',
+    summary: 'A deployed Flask platform bringing text-to-speech, speech-to-text, spell correction, spam classification, and sentiment analysis behind one interface.',
+    href: '/work/nlp-hub',
+  },
+  {
+    name: 'Umbrella Alert',
+    period: '2023',
+    tags: 'Python, Machine Learning, Flask',
+    summary: 'A web app predicting next-day rainfall probability; achieved an AUC/ROC score of 0.89 using CatBoost.',
+    href: 'https://github.com/prudhvish11/Umbrella-Alert',
+  },
+];
+
+const certifications = ['Microsoft Certified: Azure AI Fundamentals (AI-900)', 'IBM AI Engineering Professional Certificate'];
+
+const achievements = [
+  'Promoted from Associate to Analyst at Accenture within 19 months, based on project performance and impact.',
+  'Recipient of the Accenture ACE Award for high-impact project contributions.',
+  'Top-5 finish in an IBM Hackathon for the Smart Steer autonomous-driving project.',
 ];
 ---
 
@@ -68,8 +99,14 @@ const skills = [
         {experience.map((job) => (
           <li>
             <div class="job-head">
-              <p class="job-role">{job.role} <span class="job-org">· {job.org}</span></p>
-              <p class="type-meta">{job.period}</p>
+              <p class="job-role">
+                {job.role} <span class="job-org">· {job.org}</span>
+                {job.note && <span class="job-note">({job.note})</span>}
+              </p>
+              <div class="job-meta">
+                <p class="type-meta">{job.period}</p>
+                <p class="type-meta job-location">{job.location}</p>
+              </div>
             </div>
             <ul class="job-points">
               {job.points.map((point) => <li>{point}</li>)}
@@ -89,6 +126,55 @@ const skills = [
           </div>
         ))}
       </div>
+    </section>
+
+    <section class="container resume-section" aria-labelledby="projects-heading">
+      <p class="type-meta" id="projects-heading">PROJECTS</p>
+      <ul class="projects-list">
+        {projects.map((project) => (
+          <li>
+            <div class="job-head">
+              <p class="job-role">{project.name}</p>
+              <p class="type-meta">{project.period}</p>
+            </div>
+            <p class="type-meta project-tags">{project.tags}</p>
+            <p class="type-body project-summary">{project.summary}</p>
+            <ArrowLink href={project.href} direction={project.href.startsWith('http') ? 'external' : 'deeper'} external={project.href.startsWith('http')}>
+              {project.href.startsWith('http') ? 'Source' : 'Case study'}
+            </ArrowLink>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="container resume-section" aria-labelledby="publication-heading">
+      <p class="type-meta" id="publication-heading">PUBLICATION</p>
+      <div class="publication-block">
+        <div class="job-head">
+          <p class="job-role">DeTox: A WebApp for Toxic Comment Detection and Moderation</p>
+          <p class="type-meta">2 Mar 2024</p>
+        </div>
+        <p class="type-meta project-tags">IEEE Conference (TQCEBT-24) · Christ University, Pune</p>
+        <p class="type-body project-summary">
+          A college research project (4-member team) building a BERT-based toxic-comment detection and moderation
+          platform integrated with the YouTube Data API.
+        </p>
+        <ArrowLink href="https://ieeexplore.ieee.org/document/10545229/" direction="external" external>IEEE Publication</ArrowLink>
+      </div>
+    </section>
+
+    <section class="container resume-section" aria-labelledby="certifications-heading">
+      <p class="type-meta" id="certifications-heading">CERTIFICATIONS</p>
+      <ul class="plain-list type-body">
+        {certifications.map((cert) => <li>{cert}</li>)}
+      </ul>
+    </section>
+
+    <section class="container resume-section" aria-labelledby="achievements-heading">
+      <p class="type-meta" id="achievements-heading">ACHIEVEMENTS</p>
+      <ul class="plain-list type-body">
+        {achievements.map((item) => <li>{item}</li>)}
+      </ul>
     </section>
 
     <section class="container resume-section resume-section--last" aria-labelledby="education-heading">
@@ -143,7 +229,7 @@ const skills = [
     margin-top: var(--space-8);
     display: flex;
     flex-direction: column;
-    gap: var(--space-8);
+    gap: var(--space-10);
   }
 
   .job-head {
@@ -151,6 +237,7 @@ const skills = [
     justify-content: space-between;
     align-items: baseline;
     gap: var(--space-4);
+    flex-wrap: wrap;
   }
 
   .job-role {
@@ -161,6 +248,22 @@ const skills = [
   .job-org {
     font-weight: 400;
     color: var(--stone);
+  }
+
+  .job-note {
+    font-size: 0.85rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--stone);
+    margin-left: var(--space-2);
+  }
+
+  .job-meta {
+    text-align: right;
+  }
+
+  .job-location {
+    margin-top: var(--space-1);
   }
 
   .job-points {
@@ -174,7 +277,7 @@ const skills = [
   .job-points li {
     list-style: disc;
     color: var(--ink);
-    max-width: 62ch;
+    max-width: 68ch;
   }
 
   .skills-grid {
@@ -186,6 +289,45 @@ const skills = [
 
   .skill-value {
     margin-top: var(--space-2);
+  }
+
+  .projects-list {
+    margin-top: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .project-tags {
+    margin-top: var(--space-2);
+  }
+
+  .project-summary {
+    margin-top: var(--space-3);
+    max-width: 62ch;
+    color: var(--ink);
+  }
+
+  .projects-list :global(.arrow-link) {
+    margin-top: var(--space-4);
+    display: inline-flex;
+  }
+
+  .publication-block {
+    margin-top: var(--space-8);
+  }
+
+  .publication-block :global(.arrow-link) {
+    margin-top: var(--space-4);
+    display: inline-flex;
+  }
+
+  .plain-list {
+    margin-top: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    color: var(--ink);
   }
 
   @media (min-width: 700px) {
