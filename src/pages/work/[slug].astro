@@ -4,8 +4,10 @@ import { Image } from 'astro:assets';
 import WorkLayout from '../../layouts/WorkLayout.astro';
 import FlowDiagram from '../../components/diagrams/FlowDiagram.astro';
 import NlpHubDiagram from '../../components/diagrams/NlpHubDiagram.astro';
+import LifeOSMap from '../../components/diagrams/LifeOSMap.astro';
 import nlpScreenshot from '../../assets/projects/nlp-hub/nlp-hub-landing.png';
 import viduScreenshot from '../../assets/projects/imposter/vidu-kadhu-landing.png';
+import lifeosDesktop from '../../assets/projects/lifeos/lifeos-dashboard-desktop-original.png';
 
 export async function getStaticPaths() {
   const entries = await getCollection('work');
@@ -17,16 +19,22 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+
+const lifeosAlt =
+  "LifeOS desktop dashboard showing navigation for tasks, planning, goals and personal modules, with quick tracking, today's tasks, upcoming items and calendar panels.";
 ---
 
 <WorkLayout entry={entry}>
   {entry.data.visualType === 'scale-diagram' && (
-    <FlowDiagram steps={['CLOUD', 'API LAYER', 'DEVICE FLEET']} class="case-diagram" />
+    <FlowDiagram
+      steps={['DEVICE FLEET', 'EDGE APPLICATION', 'REST API LAYER', 'CLOUD SERVICES', 'ANALYTICS / DATA']}
+      class="case-diagram"
+    />
   )}
 
   {entry.data.visualType === 'retrieval-graph' && (
     <FlowDiagram
-      steps={['QUERY', 'RETRIEVAL', 'FILES / REPOSITORY CONTEXT', 'CONTEXT CONSTRUCTION', 'CODE ANALYSIS']}
+      steps={['QUERY', 'RETRIEVAL', 'REPOSITORIES / FILES', 'RELEVANT CONTEXT', 'LLM ANALYSIS']}
       class="case-diagram"
     />
   )}
@@ -43,9 +51,18 @@ const { Content } = await render(entry);
 
   {entry.data.visualType === 'research-archive' && (
     <FlowDiagram
-      steps={['VIDEO', 'YOUTUBE DATA API', 'COMMENTS', 'PREPROCESSING', 'CLASSIFICATION', 'MODERATOR REVIEW', 'KEEP / REMOVE']}
+      steps={['VIDEO URL', 'YOUTUBE DATA API', 'COMMENT RETRIEVAL', 'TEXT PREPROCESSING', 'TOXICITY MODEL', 'MODERATION UI', 'KEEP / REVIEW / REMOVE']}
       class="case-diagram"
     />
+  )}
+
+  {entry.data.visualType === 'product-screens' && (
+    <>
+      <figure class="media-frame case-shot case-shot--lifeos">
+        <Image src={lifeosDesktop} alt={lifeosAlt} widths={[768, 1024, 1440, 2048]} sizes="(min-width: 900px) 900px, 92vw" loading="lazy" decoding="async" />
+      </figure>
+      <LifeOSMap />
+    </>
   )}
 
   {entry.data.visualType === 'playful-product' && (
@@ -67,6 +84,19 @@ const { Content } = await render(entry);
     margin-bottom: var(--space-8);
     aspect-ratio: 4 / 3;
     max-width: 700px;
+  }
+
+  .case-shot--lifeos {
+    aspect-ratio: 2048 / 1059;
+    max-width: 900px;
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .case-shot--lifeos :global(img) {
+    object-fit: contain;
+    background: #0c1220;
   }
 
   .case-shot figcaption {

@@ -3,7 +3,6 @@ const navItems = [
   { number: '01', label: 'WORK', href: '/work' },
   { number: '02', label: 'WRITING', href: '/writing' },
   { number: '03', label: 'ABOUT', href: '/about' },
-  { number: '04', label: 'RESUME', href: '/resume' },
 ];
 ---
 
@@ -22,7 +21,10 @@ const navItems = [
           </li>
         ))}
       </ul>
-      <a href="/#contact" class="contact-arrow" aria-label="Jump to contact">↗</a>
+      <a href="/#contact" class="contact-link">
+        <span class="nav-label">CONTACT</span>
+        <span aria-hidden="true">↗</span>
+      </a>
     </nav>
 
     <button
@@ -119,13 +121,22 @@ const navItems = [
       opacity: 1;
     }
 
-    .contact-arrow {
-      font-size: 1.1rem;
+    .contact-link {
+      display: inline-flex;
+      align-items: baseline;
+      gap: var(--space-2);
+      font-family: var(--font-mono);
+      font-size: var(--text-meta);
+      letter-spacing: 0.06em;
+    }
+
+    .contact-link span[aria-hidden] {
+      display: inline-block;
       transition: transform var(--duration-fast) var(--ease-standard);
     }
 
-    .contact-arrow:hover,
-    .contact-arrow:focus-visible {
+    .contact-link:hover span[aria-hidden],
+    .contact-link:focus-visible span[aria-hidden] {
       transform: translate(2px, -2px);
     }
   }

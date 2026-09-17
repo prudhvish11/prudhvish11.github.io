@@ -1,127 +1,31 @@
 ---
-import { getEntry } from 'astro:content';
-import ArrowLink from '../global/ArrowLink.astro';
-import FlowDiagram from '../diagrams/FlowDiagram.astro';
-
-const detox = await getEntry('work', 'detox');
-
-const recognition = [
-  { year: '2026', title: 'ACE Award', org: 'Accenture' },
-  { year: '2025', title: 'Promoted to Analyst', org: 'Accenture' },
-  { year: '2024', title: 'IEEE Publication', org: 'DeTox' },
-];
-
-const certifications = [
-  'Microsoft Certified: Azure AI Fundamentals',
-  'IBM AI Engineering Professional Certificate',
+const signals = [
+  'ACE AWARD / 2026',
+  'PROMOTED TO ANALYST / 2026',
+  'IEEE PUBLICATION / 2024',
+  'AZURE AI FUNDAMENTALS',
+  'IBM AI ENGINEERING',
 ];
 ---
 
-<section class="chapter chapter-light render-contained" data-chapter-theme="light" aria-labelledby="recognition-heading">
-  <div class="container recognition-grid">
-    <div class="detox-block">
-      <p class="type-meta">COLLEGE RESEARCH PROJECT</p>
-      <h2 id="recognition-heading" class="type-project">DETOX</h2>
-      <p class="type-body detox-desc">{detox?.data.summary}</p>
-      <p class="type-meta">{detox?.data.technologies.join(' / ')}</p>
-
-      <FlowDiagram
-        class="detox-diagram"
-        steps={['VIDEO', 'YOUTUBE DATA API', 'COMMENTS', 'PREPROCESSING', 'CLASSIFICATION', 'MODERATOR REVIEW', 'KEEP / REMOVE']}
-      />
-
-      <ArrowLink href={detox?.data.externalUrl ?? '/work/detox'} direction="external" external>IEEE Publication</ArrowLink>
-    </div>
-
-    <div class="recognition-list-block">
-      <p class="type-meta">RECOGNITION</p>
-      <ol class="recognition-list">
-        {recognition.map((item) => (
-          <li>
-            <span class="type-meta rec-year">{item.year}</span>
-            <span>
-              <span class="rec-title">{item.title}</span>
-              <span class="type-meta rec-org">{item.org}</span>
-            </span>
-          </li>
-        ))}
-      </ol>
-
-      <p class="type-meta certs-label">CERTIFICATIONS</p>
-      <ul class="certs-list type-body">
-        {certifications.map((cert) => <li>{cert}</li>)}
-      </ul>
-    </div>
-  </div>
-</section>
+<div class="signals-strip">
+  <p class="type-meta signals-label">SELECTED SIGNALS</p>
+  <ul class="signals-list type-meta">
+    {signals.map((signal) => <li>{signal}</li>)}
+  </ul>
+</div>
 
 <style>
-  .recognition-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-16);
-  }
-
-  .detox-block {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    align-items: flex-start;
-  }
-
-  .detox-desc {
-    max-width: 52ch;
-    color: var(--ink);
-  }
-
-  .detox-diagram {
-    margin-block: var(--space-4);
-  }
-
-  .recognition-list {
-    margin-top: var(--space-6);
+  .signals-strip {
+    margin-top: var(--space-16);
+    padding-top: var(--space-8);
     border-top: 1px solid var(--border-light);
   }
 
-  .recognition-list li {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-6);
-    padding-block: var(--space-4);
-    border-bottom: 1px solid var(--border-light);
-  }
-
-  .rec-year {
-    flex: none;
-    width: 3rem;
-    color: var(--maroon);
-  }
-
-  .rec-title {
-    display: block;
-    font-weight: 500;
-  }
-
-  .rec-org {
-    display: block;
-    margin-top: var(--space-1);
-  }
-
-  .certs-label {
-    margin-top: var(--space-12);
-  }
-
-  .certs-list {
+  .signals-list {
     margin-top: var(--space-4);
     display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    color: var(--stone);
-  }
-
-  @media (min-width: 900px) {
-    .recognition-grid {
-      grid-template-columns: 1.1fr 1fr;
-    }
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-8);
   }
 </style>

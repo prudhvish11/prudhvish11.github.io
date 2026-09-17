@@ -1,0 +1,94 @@
+---
+const modules = ['BODY', 'NUTRITION', 'WORKOUT', 'WATER', 'STUDY', 'CAREER', 'FINANCE'];
+const top = ['HOME', 'TASKS', 'PLANNER', 'PROGRESS', 'GOALS', 'NOTES'];
+
+const systems = [
+  { label: 'CAPTURE', detail: 'Quick Track' },
+  { label: 'PLAN', detail: 'Tasks / Planner / Upcoming' },
+  { label: 'MEASURE', detail: 'Progress / weekly summaries' },
+  { label: 'LIFE MODULES', detail: 'Health / Study / Career / Finance' },
+];
+---
+
+<div class="lifeos-ia">
+  <p class="ia-root">LIFEOS</p>
+  <ul class="ia-list">
+    {top.map((item) => <li>{item}</li>)}
+    <li>
+      MODULES
+      <ul class="ia-sublist">
+        {modules.map((mod) => <li>{mod}</li>)}
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<div class="lifeos-systems">
+  {systems.map((s) => (
+    <div class="system-row">
+      <span class="system-label">{s.label}</span>
+      <span class="system-arrow" aria-hidden="true">→</span>
+      <span class="system-detail">{s.detail}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .lifeos-ia,
+  .lifeos-systems {
+    font-family: var(--font-mono);
+    font-size: var(--text-meta);
+    letter-spacing: 0.04em;
+  }
+
+  .ia-root {
+    font-weight: 600;
+    color: var(--maroon);
+    text-transform: uppercase;
+  }
+
+  .ia-list,
+  .ia-sublist {
+    padding-left: 1.25em;
+    border-left: 1px solid var(--border-light);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .ia-sublist {
+    margin-top: var(--space-2);
+  }
+
+  .lifeos-systems {
+    margin-top: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .system-row {
+    display: flex;
+    gap: var(--space-4);
+    align-items: baseline;
+  }
+
+  .system-label {
+    width: 8rem;
+    flex: none;
+    color: var(--maroon);
+  }
+
+  .system-arrow {
+    color: var(--stone);
+  }
+
+  .system-detail {
+    color: var(--ink);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+</style>

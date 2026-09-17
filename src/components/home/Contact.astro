@@ -4,7 +4,7 @@ import SectionLabel from '../global/SectionLabel.astro';
 
 <section id="contact" class="chapter chapter-dark contact-section" data-chapter-theme="dark" aria-labelledby="contact-heading">
   <div class="container">
-    <SectionLabel number="09" label="CONTACT" />
+    <SectionLabel number="10" label="CONTACT" />
     <h2 id="contact-heading" class="type-chapter balance">
       HAVE SOMETHING<br />INTERESTING<br />TO BUILD?
     </h2>
@@ -16,6 +16,8 @@ import SectionLabel from '../global/SectionLabel.astro';
       </span>
       <span class="label">Let's talk</span>
     </a>
+
+    <p class="closing-mark" aria-hidden="true">PN.</p>
   </div>
 </section>
 
@@ -27,5 +29,14 @@ import SectionLabel from '../global/SectionLabel.astro';
   .contact-cta {
     margin-top: var(--space-12);
     font-size: 1.25rem;
+  }
+
+  .closing-mark {
+    margin-top: var(--space-24);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: var(--stone);
   }
 </style>

@@ -1,6 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
 import { Image } from 'astro:assets';
+import SectionLabel from '../global/SectionLabel.astro';
 import ArrowLink from '../global/ArrowLink.astro';
 import NlpHubDiagram from '../diagrams/NlpHubDiagram.astro';
 import screenshot from '../../assets/projects/nlp-hub/nlp-hub-landing.png';
@@ -8,13 +9,14 @@ import screenshot from '../../assets/projects/nlp-hub/nlp-hub-landing.png';
 const nlpHub = await getEntry('work', 'nlp-hub');
 ---
 
-<section class="chapter chapter-dark render-contained nlp-section" data-chapter-theme="dark" aria-labelledby="nlp-heading">
+<section id="nlp-hub" class="chapter chapter-dark render-contained nlp-section" data-chapter-theme="dark" aria-labelledby="nlp-heading">
   <div class="container nlp-grid">
     <div class="nlp-copy">
-      <p class="type-meta">{nlpHub?.data.labels.join(' / ')}</p>
+      <SectionLabel number="04" label="INDEPENDENT BUILD" />
+      <p class="type-meta nlp-year">2022 — an early attempt to turn NLP models into a usable product.</p>
       <h2 id="nlp-heading" class="type-project nlp-title">NLP<br />HUB.</h2>
       <p class="type-support">One interface. Multiple language tools.</p>
-      <p class="type-meta nlp-tech">{nlpHub?.data.technologies.join(' / ')} — {nlpHub?.data.period}</p>
+      <p class="type-meta nlp-tech">{nlpHub?.data.technologies.join(' / ')}</p>
       <p class="type-body nlp-desc">{nlpHub?.data.summary}</p>
       <div class="nlp-links">
         <ArrowLink href={nlpHub?.data.externalUrl ?? '#'} direction="external" external>View live</ArrowLink>
@@ -42,6 +44,11 @@ const nlpHub = await getEntry('work', 'nlp-hub');
   .nlp-title {
     color: var(--warm-white);
     margin-top: var(--space-4);
+  }
+
+  .nlp-year {
+    margin-top: var(--space-6);
+    max-width: 32ch;
   }
 
   .nlp-tech {

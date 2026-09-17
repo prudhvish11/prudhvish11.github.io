@@ -1,0 +1,55 @@
+---
+import { getEntry } from 'astro:content';
+import SectionLabel from '../global/SectionLabel.astro';
+import ArrowLink from '../global/ArrowLink.astro';
+import FlowDiagram from '../diagrams/FlowDiagram.astro';
+
+const entry = await getEntry('work', 'rag-code-intelligence');
+---
+
+<section id="rag" class="chapter chapter-dark render-contained" data-chapter-theme="dark" aria-labelledby="rag-heading">
+  <div class="container rag-grid">
+    <div class="rag-copy">
+      <SectionLabel number="03" label="RAG CODE INTELLIGENCE" />
+      <h2 id="rag-heading" class="type-chapter balance">
+        CODE IS ONLY USEFUL<br />IF YOU CAN FIND<br />THE RIGHT CONTEXT.
+      </h2>
+      <p class="type-body rag-desc">{entry?.data.summary}</p>
+      <ArrowLink href="/work/rag-code-intelligence" direction="deeper">Read the case study</ArrowLink>
+    </div>
+
+    <FlowDiagram
+      steps={['QUERY', 'RETRIEVAL', 'REPOSITORIES / FILES', 'RELEVANT CONTEXT', 'LLM ANALYSIS']}
+      class="rag-diagram"
+    />
+  </div>
+</section>
+
+<style>
+  .rag-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-16);
+  }
+
+  .rag-desc {
+    margin-top: var(--space-6);
+    color: var(--stone);
+    max-width: 48ch;
+  }
+
+  .rag-copy > :global(.arrow-link) {
+    margin-top: var(--space-8);
+  }
+
+  .rag-diagram {
+    color: var(--warm-white);
+  }
+
+  @media (min-width: 900px) {
+    .rag-grid {
+      grid-template-columns: 1.1fr 1fr;
+      align-items: center;
+    }
+  }
+</style>

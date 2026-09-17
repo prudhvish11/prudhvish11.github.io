@@ -1,6 +1,15 @@
 ---
 import { Image } from 'astro:assets';
-import heroPhoto from '../../assets/photos/hero_maroon_original.jpeg';
+import heroPhoto from '../../assets/photos/hero-maroon-original.jpeg';
+
+const nodes = [
+  { id: 'ai', label: 'AI / RAG', angle: -90, href: '#rag', context: 'Retrieval, embeddings, context construction, code intelligence.' },
+  { id: 'mobile', label: 'MOBILE', angle: -30, href: '#enterprise-android', context: 'Android, enterprise applications, REST, edge devices.' },
+  { id: 'systems', label: 'SYSTEMS', angle: 30, href: '#engineering', context: 'Integration and consistency — the same data, everywhere it moves.' },
+  { id: 'lab', label: 'PERSONAL LAB', angle: 90, href: '#personal-lab', context: 'LifeOS, Imposter — AI-assisted product experiments.' },
+  { id: 'backend', label: 'BACKEND', angle: 150, href: '#engineering', context: 'Python, FastAPI, Flask, REST, SQL.' },
+  { id: 'writing', label: 'WRITING', angle: 210, href: '#writing', context: 'Reasons Why? — Technology, AI, Economics, Ideas.' },
+];
 ---
 
 <section class="hero chapter-light" data-chapter-theme="light" aria-label="Introduction">
@@ -21,12 +30,41 @@ import heroPhoto from '../../assets/photos/hero_maroon_original.jpeg';
       </p>
     </div>
 
+    <div class="pn-system" aria-label="Areas I work across — select one to jump there">
+      <div class="pn-map" role="group">
+        <div class="pn-center" aria-hidden="true">PN.</div>
+        {nodes.map((n) => (
+          <span class="pn-line" data-for={n.id} style={`--angle: ${n.angle}deg`} aria-hidden="true"></span>
+        ))}
+        {nodes.map((n) => (
+          <a href={n.href} class="pn-node" id={`node-${n.id}`} style={`--angle: ${n.angle}deg`}>{n.label}</a>
+        ))}
+      </div>
+      <div class="pn-context">
+        {nodes.map((n) => (
+          <p data-context={n.id}>{n.context}</p>
+        ))}
+        <p class="pn-context-default">Select an area to see how it connects.</p>
+      </div>
+    </div>
+
+    <ol class="pn-index">
+      {nodes.map((n, i) => (
+        <li>
+          <a href={n.href}>
+            <span class="index-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            {n.label}
+          </a>
+        </li>
+      ))}
+    </ol>
+
     <figure class="hero-photo">
       <Image
         src={heroPhoto}
         alt="Prudhvish Narayanam standing outdoors at dusk"
         widths={[480, 768, 1024, 1440]}
-        sizes="(min-width: 1200px) 46vw, (min-width: 700px) 60vw, 92vw"
+        sizes="(min-width: 1200px) 40vw, (min-width: 700px) 55vw, 92vw"
         loading="eager"
         fetchpriority="high"
         quality={82}
@@ -36,7 +74,7 @@ import heroPhoto from '../../assets/photos/hero_maroon_original.jpeg';
     <div class="hero-tail">
       <p class="type-meta hero-meta">SOFTWARE / MOBILE / AI / SYSTEMS</p>
 
-      <a href="#work" class="cta-circle hero-cta">
+      <a href="#enterprise-android" class="cta-circle hero-cta">
         <span class="circle" aria-hidden="true">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -71,11 +109,44 @@ import heroPhoto from '../../assets/photos/hero_maroon_original.jpeg';
   }
 
   .hero-intro {
+    order: 1;
+  }
+
+  .hero-body {
+    max-width: 30ch;
+    margin-top: var(--space-6);
+  }
+
+  /* Mobile numbered index — replaces the radial map, per spec 6.4 */
+  .pn-index {
     order: 2;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-mono);
+    font-size: var(--text-meta);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--border-light);
+  }
+
+  .pn-index a {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-4);
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .index-number {
+    color: var(--maroon);
+  }
+
+  .pn-system {
+    display: none;
   }
 
   .hero-photo {
-    order: 1;
+    order: 3;
     aspect-ratio: 4 / 3;
   }
 
@@ -86,13 +157,8 @@ import heroPhoto from '../../assets/photos/hero_maroon_original.jpeg';
     object-position: 50% 22%;
   }
 
-  .hero-body {
-    max-width: 30ch;
-    margin-top: var(--space-6);
-  }
-
   .hero-tail {
-    order: 3;
+    order: 4;
   }
 
   .hero-meta {
@@ -120,45 +186,149 @@ import heroPhoto from '../../assets/photos/hero_maroon_original.jpeg';
 
   /* Tablet portrait — text leads, photo sits between body and metadata */
   @media (min-width: 700px) {
-    .hero-intro {
-      order: 1;
-    }
-
     .hero-photo {
-      order: 2;
-      aspect-ratio: 5 / 4;
-    }
-
-    .hero-tail {
       order: 3;
+      aspect-ratio: 5 / 4;
     }
   }
 
-  /* Tablet landscape / small desktop — two columns */
+  /* Tablet landscape+ — the PN systems map replaces the mobile index */
+  @media (min-width: 900px) {
+    .pn-index {
+      display: none;
+    }
+
+    .pn-system {
+      display: block;
+      order: 2;
+    }
+
+    .pn-map {
+      position: relative;
+      aspect-ratio: 1;
+      width: 100%;
+      max-width: 22rem;
+      margin-inline: auto;
+      --r: clamp(6rem, 9vw, 8.5rem);
+    }
+
+    .pn-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .pn-line {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: var(--r);
+      height: 1px;
+      background: var(--border-light);
+      transform-origin: 0 50%;
+      transform: rotate(var(--angle));
+      transition: background-color var(--duration-medium) var(--ease-standard);
+    }
+
+    .pn-node {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%)
+        translate(calc(cos(var(--angle)) * var(--r)), calc(sin(var(--angle)) * var(--r)));
+      font-family: var(--font-mono);
+      font-size: var(--text-meta);
+      letter-spacing: 0.06em;
+      text-align: center;
+      padding: var(--space-2) var(--space-3);
+      background: var(--paper);
+      transition: opacity var(--duration-medium) var(--ease-standard), color var(--duration-medium) var(--ease-standard);
+    }
+
+    .pn-map:has(.pn-node:hover, .pn-node:focus-visible) .pn-node:not(:hover):not(:focus-visible) {
+      opacity: 0.6;
+    }
+
+    .pn-node:hover,
+    .pn-node:focus-visible {
+      color: var(--maroon);
+    }
+
+    .pn-context {
+      margin-top: var(--space-8);
+      min-height: 3rem;
+      text-align: center;
+      color: var(--stone);
+      max-width: 26rem;
+      margin-inline: auto;
+    }
+
+    .pn-context p {
+      display: none;
+    }
+
+    .pn-context-default {
+      display: block;
+    }
+
+    /* One rule per node: reveal its context, dim the default line, strengthen its own line */
+    .pn-map:has(#node-ai:hover, #node-ai:focus-visible) ~ .pn-context p[data-context='ai'],
+    .pn-map:has(#node-mobile:hover, #node-mobile:focus-visible) ~ .pn-context p[data-context='mobile'],
+    .pn-map:has(#node-systems:hover, #node-systems:focus-visible) ~ .pn-context p[data-context='systems'],
+    .pn-map:has(#node-lab:hover, #node-lab:focus-visible) ~ .pn-context p[data-context='lab'],
+    .pn-map:has(#node-backend:hover, #node-backend:focus-visible) ~ .pn-context p[data-context='backend'],
+    .pn-map:has(#node-writing:hover, #node-writing:focus-visible) ~ .pn-context p[data-context='writing'] {
+      display: block;
+    }
+
+    .pn-map:has(.pn-node:hover, .pn-node:focus-visible) ~ .pn-context .pn-context-default {
+      display: none;
+    }
+
+    .pn-map:has(#node-ai:hover, #node-ai:focus-visible) .pn-line[data-for='ai'],
+    .pn-map:has(#node-mobile:hover, #node-mobile:focus-visible) .pn-line[data-for='mobile'],
+    .pn-map:has(#node-systems:hover, #node-systems:focus-visible) .pn-line[data-for='systems'],
+    .pn-map:has(#node-lab:hover, #node-lab:focus-visible) .pn-line[data-for='lab'],
+    .pn-map:has(#node-backend:hover, #node-backend:focus-visible) .pn-line[data-for='backend'],
+    .pn-map:has(#node-writing:hover, #node-writing:focus-visible) .pn-line[data-for='writing'] {
+      background: var(--maroon);
+    }
+  }
+
   @media (min-width: 900px) and (max-width: 1199px) {
     .hero-grid {
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
+      grid-template-columns: 0.95fr 1.05fr;
       column-gap: var(--space-8);
       align-items: center;
     }
 
     .hero-intro {
-      order: 1;
       grid-column: 1 / 2;
       grid-row: 1;
     }
 
-    .hero-tail {
-      order: 2;
-      grid-column: 1 / 2;
-      grid-row: 2;
+    .pn-system {
+      grid-column: 2 / 3;
+      grid-row: 1 / 3;
     }
 
     .hero-photo {
-      grid-column: 2 / 3;
-      grid-row: 1 / 3;
-      aspect-ratio: 4 / 5;
+      grid-column: 1 / 2;
+      grid-row: 2;
+      aspect-ratio: 4 / 3;
+      margin-top: var(--space-6);
+    }
+
+    .hero-tail {
+      grid-column: 1 / 3;
+      grid-row: 3;
+      margin-top: var(--space-6);
     }
   }
 
@@ -166,8 +336,8 @@ import heroPhoto from '../../assets/photos/hero_maroon_original.jpeg';
   @media (min-width: 1200px) {
     .hero-grid {
       display: grid;
-      grid-template-columns: 5fr 1fr 6fr;
-      column-gap: var(--space-8);
+      grid-template-columns: 5fr 6fr;
+      column-gap: var(--space-12);
       align-items: start;
     }
 
@@ -177,23 +347,30 @@ import heroPhoto from '../../assets/photos/hero_maroon_original.jpeg';
       padding-top: clamp(0.5rem, 1vw, 1.5rem);
     }
 
-    .hero-tail {
-      grid-column: 1 / 2;
-      grid-row: 2;
-      margin-top: var(--space-8);
+    .pn-system {
+      grid-column: 2 / 3;
+      grid-row: 1 / 3;
     }
 
     .hero-photo {
-      grid-column: 3 / 4;
-      grid-row: 1 / 3;
+      grid-column: 1 / 2;
+      grid-row: 2;
       aspect-ratio: 4 / 5;
-      margin-top: clamp(1.5rem, 3vw, 3.5rem);
+      max-width: 24rem;
+      margin-top: var(--space-8);
+    }
+
+    .hero-tail {
+      grid-column: 1 / 2;
+      grid-row: 3;
+      margin-top: var(--space-8);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
     }
 
     .hero-location {
       display: block;
-      grid-column: 3 / 4;
-      grid-row: 3;
       text-align: right;
     }
 
