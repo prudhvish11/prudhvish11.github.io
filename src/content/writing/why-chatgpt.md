@@ -1,5 +1,5 @@
 ---
-title: "Why ChatGPT ?"
+title: "Whyy ChatGPT ?"
 excerpt: "What ChatGPT actually is, written in the first weeks after it arrived — before the hype cycle caught up to it."
 publishedAt: 2023-02-13
 categories: ["AI", "Technology"]

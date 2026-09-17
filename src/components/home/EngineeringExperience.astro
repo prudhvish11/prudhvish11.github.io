@@ -37,18 +37,20 @@ const roles = [
       ))}
     </div>
 
-    <div class="experience-track" role="list" aria-label="Career progression at Accenture">
+    <div class="experience-track" aria-label="Career progression at Accenture">
       <p class="type-meta track-years"><span>2024</span><span>NOW</span></p>
       <div class="track-line" aria-hidden="true"></div>
-      <ol class="track-roles">
-        {roles.map((role) => (
-          <li role="listitem">
-            <p class="role-title">{role.title}</p>
-            <p class="type-meta">{role.period}</p>
-          </li>
-        ))}
-      </ol>
-      <p class="type-meta track-company">ACCENTURE</p>
+      <div class="track-roles">
+        <div class="track-role">
+          <p class="role-title">{roles[0].title}</p>
+          <p class="type-meta">{roles[0].period}</p>
+        </div>
+        <p class="type-meta track-company">ACCENTURE</p>
+        <div class="track-role">
+          <p class="role-title">{roles[1].title}</p>
+          <p class="type-meta">{roles[1].period}</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -98,6 +100,8 @@ const roles = [
   .track-roles {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: var(--space-6);
   }
 
@@ -109,8 +113,9 @@ const roles = [
   }
 
   .track-company {
-    margin-top: var(--space-6);
-    text-align: center;
+    letter-spacing: 0.1em;
+    color: var(--warm-white);
+    font-weight: 600;
   }
 
   @media (min-width: 700px) {
@@ -127,6 +132,15 @@ const roles = [
     .track-roles {
       flex-direction: row;
       justify-content: space-between;
+      align-items: center;
+    }
+
+    .track-role:first-child {
+      text-align: left;
+    }
+
+    .track-role:last-child {
+      text-align: right;
     }
   }
 </style>

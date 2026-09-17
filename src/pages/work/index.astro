@@ -101,6 +101,17 @@ const archive = [
     border-bottom: 1px solid var(--border-light);
   }
 
+  .row-name {
+    display: inline-block;
+    transform-origin: left center;
+    transition: transform var(--duration-medium) var(--ease-standard);
+  }
+
+  .work-row:hover .row-name,
+  .work-row:focus-visible .row-name {
+    transform: scale(1.06);
+  }
+
   .row-meta {
     color: var(--stone);
     margin-inline-end: auto;
