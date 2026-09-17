@@ -1,5 +1,6 @@
 ---
 import SectionLabel from '../global/SectionLabel.astro';
+import SystemsMap from '../diagrams/SystemsMap.astro';
 
 const skills = [
   { label: 'LANGUAGES', value: 'Java / Python / SQL' },
@@ -13,23 +14,20 @@ const roles = [
   { title: 'Associate', period: '2024 — 2025' },
   { title: 'Analyst', period: '2025 — Now' },
 ];
-
-const nowSignals = [
-  'Building enterprise Android systems.',
-  'Exploring RAG + intelligent developer tooling.',
-  'Building personal products.',
-  'Writing when something makes me ask why.',
-];
 ---
 
-<section id="engineering" class="chapter chapter-dark render-contained" data-chapter-theme="dark" aria-labelledby="systems-heading">
+<section class="chapter chapter-dark render-contained" data-chapter-theme="dark" aria-labelledby="systems-heading">
   <div class="container">
-    <SectionLabel number="08" label="ENGINEERING + EXPERIENCE" />
+    <SectionLabel number="07" label="ENGINEERING + EXPERIENCE" />
 
     <h2 id="systems-heading" class="type-chapter balance">SYSTEMS<br />OVER<br />BUZZWORDS.</h2>
     <p class="type-support systems-intro">
       I work across mobile, backend and intelligent systems — usually where data has to move reliably between them.
     </p>
+
+    <div class="systems-map-wrap">
+      <SystemsMap />
+    </div>
 
     <div class="skills-grid">
       {skills.map((skill) => (
@@ -53,13 +51,6 @@ const nowSignals = [
       </ol>
       <p class="type-meta track-company">ACCENTURE</p>
     </div>
-
-    <div class="now-block">
-      <p class="type-meta">NOW / 2026</p>
-      <ul class="now-list type-body">
-        {nowSignals.map((signal) => <li>{signal}</li>)}
-      </ul>
-    </div>
   </div>
 </section>
 
@@ -68,6 +59,11 @@ const nowSignals = [
     max-width: 46ch;
     margin-top: var(--space-6);
     color: var(--stone);
+  }
+
+  .systems-map-wrap {
+    margin-top: var(--space-16);
+    padding-block: var(--space-8);
   }
 
   .skills-grid {
@@ -116,20 +112,6 @@ const nowSignals = [
   .track-company {
     margin-top: var(--space-6);
     text-align: center;
-  }
-
-  .now-block {
-    margin-top: var(--space-16);
-    padding-top: var(--space-8);
-    border-top: 1px solid var(--border-dark);
-  }
-
-  .now-list {
-    margin-top: var(--space-4);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    color: var(--warm-white);
   }
 
   @media (min-width: 700px) {

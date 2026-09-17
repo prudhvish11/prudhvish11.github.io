@@ -16,15 +16,6 @@ const groups = [
   { id: 'personal-lab', label: 'Personal Lab', entries: byCategory('personal-lab') },
 ];
 
-const previews: Record<string, string> = {
-  'enterprise-android': '15,000+ TRANSIT DEVICES',
-  'rag-code-intelligence': 'QUERY → RETRIEVAL → CONTEXT',
-  'nlp-hub': '5 LANGUAGE TOOLS / 1 INTERFACE',
-  detox: 'COMMENTS → CLASSIFICATION → MODERATION',
-  lifeos: 'REAL PRODUCT DASHBOARD',
-  imposter: 'PLAYFUL SOCIAL GAME',
-};
-
 const archive = [
   {
     year: '2023',
@@ -39,52 +30,41 @@ const archive = [
   title="Work — Prudhvish Narayanam"
   description="Systems, products, experiments and research — professional, independent, research, and personal-lab work by Prudhvish Narayanam."
 >
-  <div class="chapter-light work-index" data-chapter-theme="light">
+  <div class="chapter-light" data-chapter-theme="light">
     <header class="container work-index-header">
       <h1 class="type-chapter">WORK</h1>
       <p class="type-support balance">Systems, products, experiments and research.</p>
     </header>
 
-    <div class="work-body">
-      <div class="work-groups">
-        {groups.map((group) => (
-          <section class="container work-group" aria-labelledby={`group-${group.id}`}>
-            <p id={`group-${group.id}`} class="type-meta group-label">{group.label}</p>
-            <ul class="work-list">
-              {group.entries.map((entry) => (
-                <li>
-                  <a href={`/work/${entry.id}`} id={`row-${entry.id}`} class="work-row">
-                    <span class="row-name type-project">{entry.data.shortTitle}</span>
-                    <span class="row-meta type-meta">{entry.data.period} — {entry.data.technologies.join(' / ')}</span>
-                    <span class="row-arrow" aria-hidden="true">→</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
+    {groups.map((group) => (
+      <section class="container work-group" aria-labelledby={`group-${group.id}`}>
+        <p id={`group-${group.id}`} class="type-meta group-label">{group.label}</p>
+        <ul class="work-list">
+          {group.entries.map((entry) => (
+            <li>
+              <a href={`/work/${entry.id}`} class="work-row">
+                <span class="row-name type-project">{entry.data.shortTitle}</span>
+                <span class="row-meta type-meta">{entry.data.period} — {entry.data.technologies.join(' / ')}</span>
+                <span class="row-arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
 
-        <section class="container work-archive" aria-labelledby="archive-label">
-          <p id="archive-label" class="type-meta group-label">Archive</p>
-          <ul class="archive-list type-meta">
-            {archive.map((item) => (
-              <li>
-                <span class="archive-year">{item.year}</span>
-                <ArrowLink href={item.href} direction="external" external class="archive-name">{item.name}</ArrowLink>
-                <span class="archive-tags">{item.tags}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
-
-      <aside class="work-preview type-meta" aria-hidden="true">
-        {Object.entries(previews).map(([slug, text]) => (
-          <p data-preview={slug}>{text}</p>
+    <section class="container work-archive" aria-labelledby="archive-label">
+      <p id="archive-label" class="type-meta group-label">Archive</p>
+      <ul class="archive-list type-meta">
+        {archive.map((item) => (
+          <li>
+            <span class="archive-year">{item.year}</span>
+            <ArrowLink href={item.href} direction="external" external class="archive-name">{item.name}</ArrowLink>
+            <span class="archive-tags">{item.tags}</span>
+          </li>
         ))}
-        <p class="preview-default">Select a project</p>
-      </aside>
-    </div>
+      </ul>
+    </section>
   </div>
 </BaseLayout>
 
@@ -169,53 +149,10 @@ const archive = [
     color: var(--stone);
   }
 
-  .work-preview {
-    display: none;
-  }
-
   @media (min-width: 700px) {
     .row-name {
       flex: none;
       width: 16rem;
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .work-body {
-      display: grid;
-      grid-template-columns: 1fr 20rem;
-      column-gap: var(--space-12);
-      align-items: start;
-    }
-
-    .work-preview {
-      display: block;
-      position: sticky;
-      top: 8rem;
-      color: var(--maroon);
-      letter-spacing: 0.08em;
-    }
-
-    .work-preview p {
-      display: none;
-    }
-
-    .work-preview .preview-default {
-      display: block;
-      color: var(--stone);
-    }
-
-    .work-index:has(#row-enterprise-android:hover, #row-enterprise-android:focus-visible) .work-preview p[data-preview='enterprise-android'],
-    .work-index:has(#row-rag-code-intelligence:hover, #row-rag-code-intelligence:focus-visible) .work-preview p[data-preview='rag-code-intelligence'],
-    .work-index:has(#row-nlp-hub:hover, #row-nlp-hub:focus-visible) .work-preview p[data-preview='nlp-hub'],
-    .work-index:has(#row-detox:hover, #row-detox:focus-visible) .work-preview p[data-preview='detox'],
-    .work-index:has(#row-lifeos:hover, #row-lifeos:focus-visible) .work-preview p[data-preview='lifeos'],
-    .work-index:has(#row-imposter:hover, #row-imposter:focus-visible) .work-preview p[data-preview='imposter'] {
-      display: block;
-    }
-
-    .work-index:has(.work-row:hover, .work-row:focus-visible) .work-preview .preview-default {
-      display: none;
     }
   }
 </style>

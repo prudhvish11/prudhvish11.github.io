@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import SectionLabel from '../global/SectionLabel.astro';
 import ArrowLink from '../global/ArrowLink.astro';
-import silhouette from '../../assets/photos/writing-silhouette-original.jpeg';
+import silhouette from '../../assets/photos/writing_silhouette_original.jpeg';
 
 const allPosts = await getCollection('writing');
 const posts = allPosts
@@ -11,9 +11,9 @@ const posts = allPosts
   .slice(0, 4);
 ---
 
-<section id="writing" class="chapter chapter-light render-contained" data-chapter-theme="light" aria-labelledby="writing-heading">
+<section class="chapter chapter-light render-contained" data-chapter-theme="light" aria-labelledby="writing-heading">
   <div class="container">
-    <SectionLabel number="07" label="WRITING" />
+    <SectionLabel number="06" label="WRITING" />
 
     <div class="writing-intro">
       <h2 id="writing-heading" class="type-chapter">REASONS<br />WHY?</h2>

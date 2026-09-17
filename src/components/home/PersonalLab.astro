@@ -1,68 +1,38 @@
 ---
 import { getEntry } from 'astro:content';
-import { Image, getImage } from 'astro:assets';
+import { Image } from 'astro:assets';
 import ArrowLink from '../global/ArrowLink.astro';
-import SectionLabel from '../global/SectionLabel.astro';
-import viduScreenshot from '../../assets/projects/imposter/vidu-kadhu-landing.png';
-import lifeosDesktop from '../../assets/projects/lifeos/lifeos-dashboard-desktop-original.png';
-import lifeosCrop from '../../assets/projects/lifeos/lifeos-dashboard-focus-crop.png';
+import screenshot from '../../assets/projects/imposter/vidu-kadhu-landing.png';
 
 const lifeos = await getEntry('work', 'lifeos');
 const imposter = await getEntry('work', 'imposter');
-
-const lifeosAlt =
-  "LifeOS desktop dashboard showing navigation for tasks, planning, goals and personal modules, with quick tracking, today's tasks, upcoming items and calendar panels.";
-
-const lifeosDesktopImg = await getImage({ src: lifeosDesktop, widths: [768, 1024, 1440, 2048], format: 'webp', quality: 82 });
-const lifeosCropImg = await getImage({ src: lifeosCrop, widths: [480, 768], format: 'webp', quality: 82 });
 ---
 
-<section id="personal-lab" class="chapter chapter-light render-contained" data-chapter-theme="light" aria-labelledby="lab-heading">
+<section class="chapter chapter-light render-contained" data-chapter-theme="light" aria-labelledby="lab-heading">
   <div class="container">
-    <SectionLabel number="06" label="PERSONAL LAB" />
     <p class="type-meta lab-kicker">AI-ASSISTED BUILD</p>
     <h2 id="lab-heading" class="type-chapter balance">
-      EXPERIMENT.<br />DESIGN.<br />SHIP.
+      PERSONAL LAB
+      <span class="type-serif lab-sub">Experiment. Design. Ship.</span>
     </h2>
     <p class="type-support lab-intro">Ideas I turn into working products with AI-assisted development.</p>
 
-    <article class="lifeos-block">
-      <div class="lifeos-copy">
+    <div class="lab-grid">
+      <article class="lab-card lab-card--lifeos">
         <p class="type-meta">{lifeos?.data.labels.join(' / ')}</p>
         <h3 class="type-project">LifeOS</h3>
-        <p class="type-support lab-tagline">A personal operating system for organizing everyday life.</p>
-        <p class="type-meta lifeos-role">PRODUCT DIRECTION / INFORMATION ARCHITECTURE / UX DIRECTION / AI-ASSISTED DEVELOPMENT</p>
+        <p class="type-support lab-tagline">{lifeos?.data.homepageSummary}</p>
+        <p class="type-body lab-desc">{lifeos?.data.summary}</p>
         <div class="lab-links">
           <ArrowLink href={lifeos?.data.externalUrl ?? '#'} direction="external" external>View live</ArrowLink>
           <ArrowLink href="/work/lifeos" direction="deeper">Case study</ArrowLink>
         </div>
-      </div>
+      </article>
 
-      <figure class="lifeos-shot">
-        <picture>
-          <source media="(min-width: 700px)" srcset={lifeosDesktopImg.srcSet.attribute} />
-          <img
-            src={lifeosCropImg.src}
-            srcset={lifeosCropImg.srcSet.attribute}
-            alt={lifeosAlt}
-            width={lifeosDesktop.width}
-            height={lifeosDesktop.height}
-            loading="lazy"
-            decoding="async"
-          />
-        </picture>
-        <figcaption class="type-meta lifeos-caption">
-          <span class="caption-crop">Desktop dashboard / detail crop</span>
-          <span class="caption-full">Real product dashboard</span>
-        </figcaption>
-      </figure>
-    </article>
-
-    <article class="imposter-block">
-      <figure class="media-frame imposter-shot">
-        <Image src={viduScreenshot} alt="Vidu Kadhu's landing screen, with Create Room and Join Room buttons" widths={[400, 600]} sizes="(min-width: 900px) 30vw, 70vw" loading="lazy" />
-      </figure>
-      <div class="imposter-copy">
+      <article class="lab-card lab-card--imposter">
+        <figure class="media-frame lab-shot">
+          <Image src={screenshot} alt="Vidu Kadhu's landing screen, with Create Room and Join Room buttons" widths={[480, 768]} sizes="(min-width: 900px) 44vw, 90vw" loading="lazy" />
+        </figure>
         <p class="type-meta">{imposter?.data.labels.join(' / ')}</p>
         <h3 class="type-project">{imposter?.data.name}</h3>
         <p class="type-support lab-tagline">{imposter?.data.summary}</p>
@@ -70,14 +40,20 @@ const lifeosCropImg = await getImage({ src: lifeosCrop, widths: [480, 768], form
           <ArrowLink href={imposter?.data.externalUrl ?? '#'} direction="external" external>Play</ArrowLink>
           <ArrowLink href="/work/imposter" direction="deeper">Case study</ArrowLink>
         </div>
-      </div>
-    </article>
+      </article>
+    </div>
   </div>
 </section>
 
 <style>
   .lab-kicker {
-    margin-top: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .lab-sub {
+    display: block;
+    font-size: 0.45em;
+    margin-top: var(--space-3);
   }
 
   .lab-intro {
@@ -86,95 +62,60 @@ const lifeosCropImg = await getImage({ src: lifeosCrop, widths: [480, 768], form
     color: var(--stone);
   }
 
+  .lab-grid {
+    margin-top: var(--space-16);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+
+  .lab-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .lab-card--lifeos {
+    background: var(--near-black);
+    color: var(--warm-white);
+    padding: var(--space-8);
+  }
+
+  .lab-card--lifeos .type-meta {
+    color: #9a9792;
+  }
+
   .lab-tagline {
     font-style: italic;
+  }
+
+  .lab-desc {
+    color: var(--stone);
+  }
+
+  .lab-card--imposter .lab-desc,
+  .lab-card--imposter .type-body {
+    color: var(--ink);
+  }
+
+  .lab-shot {
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--border-light);
   }
 
   .lab-links {
     display: flex;
     gap: var(--space-6);
-    margin-top: var(--space-6);
-  }
-
-  .lifeos-block {
-    margin-top: var(--space-16);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-8);
-  }
-
-  .lifeos-role {
-    margin-top: var(--space-4);
-    max-width: 40ch;
-  }
-
-  .lifeos-shot {
-    border: 1px solid var(--border-light);
-    border-radius: 10px;
-    overflow: hidden;
-    background: #0c1220;
-  }
-
-  .lifeos-shot img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .lifeos-caption {
-    margin-top: var(--space-3);
-    color: var(--stone);
-  }
-
-  .caption-full {
-    display: none;
-  }
-
-  @media (min-width: 700px) {
-    .caption-crop {
-      display: none;
-    }
-
-    .caption-full {
-      display: inline;
-    }
-  }
-
-  .imposter-block {
-    margin-top: var(--space-16);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-    max-width: 32rem;
-  }
-
-  .imposter-shot {
-    aspect-ratio: 4 / 3;
-  }
-
-  @media (min-width: 700px) {
-    .lifeos-shot {
-      border-radius: 12px;
-    }
+    margin-top: var(--space-2);
   }
 
   @media (min-width: 900px) {
-    .lifeos-block {
-      display: grid;
-      grid-template-columns: 0.85fr 1.15fr;
-      align-items: center;
-      gap: var(--space-12);
+    .lab-grid {
+      grid-template-columns: 1fr 1fr;
     }
 
-    .imposter-block {
-      flex-direction: row;
-      align-items: center;
-      max-width: none;
-    }
-
-    .imposter-shot {
-      flex: none;
-      width: 18rem;
+    .lab-card--lifeos {
+      padding: var(--space-12);
     }
   }
 </style>

@@ -7,12 +7,10 @@
 .chapter-dark {
   background: var(--near-black);
   color: var(--warm-white);
-  /* Both re-tuned for contrast against near-black: root --stone only hits
-     2.9:1 here (it's tuned for paper); root --maroon hits 2.4:1. Redefining
-     the custom properties in this scope fixes every usage at once instead
-     of patching individual components. */
-  --stone: #9A9792;
-  --maroon: #CC5A62;
+}
+
+.chapter-dark .type-meta {
+  color: #9A9792;
 }
 
 .chapter-light hr.rule,
