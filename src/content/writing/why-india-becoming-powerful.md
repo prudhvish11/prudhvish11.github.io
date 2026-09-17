@@ -1,5 +1,5 @@
 ---
-title: "Whyy India becoming a powerful country ???"
+title: "Whyy India Becoming a Powerful Country ???"
 excerpt: "A case for why India's next decade of growth doesn't have to depend on any other country's cooperation."
 publishedAt: 2024-07-23
 categories: ["Economics", "Ideas"]

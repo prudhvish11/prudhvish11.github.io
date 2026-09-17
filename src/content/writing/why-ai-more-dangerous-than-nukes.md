@@ -1,5 +1,5 @@
 ---
-title: "WHYY AI IS FAR MORE DANGEROUS THAN NUKES ???"
+title: "Whyy AI Is Far More Dangerous Than Nukes ???"
 excerpt: "Sitting with the claim that AI is more dangerous than nuclear weapons, and what the early warning signs actually looked like."
 publishedAt: 2023-02-18
 categories: ["AI", "Technology"]

@@ -1,5 +1,5 @@
 ---
-title: "Whyy Dollar Is A Global Currency ?"
+title: "Whyy Dollar Is a Global Currency ?"
 excerpt: "Why the US dollar became the world's reserve currency — and why that gives one country leverage no other currency has."
 publishedAt: 2025-12-22
 categories: ["Economics"]

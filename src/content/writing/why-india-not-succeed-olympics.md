@@ -1,5 +1,5 @@
 ---
-title: "Whyy India not succeed in Olympics ???"
+title: "Whyy India Not Succeed in Olympics ???"
 excerpt: "India has the population to dominate the Olympic medal table and doesn't — a look at why infrastructure is the real bottleneck."
 publishedAt: 2022-08-09
 categories: ["Ideas"]
