@@ -21,3 +21,41 @@
   height: 100%;
   object-fit: cover;
 }
+
+/* Subtle warm color-grade tying real photos to the palette — never applied to product/UI screenshots */
+.photo-grade {
+  position: relative;
+}
+
+.photo-grade::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, var(--maroon) 0%, transparent 60%);
+  opacity: 0.1;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Curtain-style reveal as a below-the-fold photo scrolls into view */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .photo-reveal {
+      animation-name: photo-reveal-wipe;
+      animation-duration: 1ms;
+      animation-timing-function: var(--ease-standard);
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
+@keyframes photo-reveal-wipe {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0% 0);
+  }
+}
