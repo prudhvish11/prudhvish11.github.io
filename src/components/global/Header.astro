@@ -5,9 +5,6 @@ const navItems = [
   { number: '03', label: 'ABOUT', href: '/about' },
   { number: '04', label: 'RESUME', href: '/resume' },
 ];
-
-const isActive = (href: string) =>
-  Astro.url.pathname === href || Astro.url.pathname.startsWith(`${href}/`);
 ---
 
 <header class="site-header" data-nav-theme="light" data-site-header>
@@ -18,7 +15,7 @@ const isActive = (href: string) =>
       <ul>
         {navItems.map((item) => (
           <li>
-            <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+            <a href={item.href}>
               <span class="nav-label">{item.label}</span>
               <span class="nav-number" aria-hidden="true">{item.number}</span>
             </a>
@@ -118,13 +115,8 @@ const isActive = (href: string) =>
     }
 
     .desktop-nav a:hover .nav-number,
-    .desktop-nav a:focus-visible .nav-number,
-    .desktop-nav a[aria-current='page'] .nav-number {
+    .desktop-nav a:focus-visible .nav-number {
       opacity: 1;
-    }
-
-    .desktop-nav a[aria-current='page'] .nav-label {
-      color: var(--maroon);
     }
 
     .contact-arrow {
