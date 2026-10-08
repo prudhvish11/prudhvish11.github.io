@@ -46,6 +46,15 @@
   padding-block: var(--chapter-rhythm);
 }
 
+/* Consecutive chapters with the same background should read as one visual
+   sequence, not two isolated screens with doubled whitespace. */
+@media (min-width: 900px) {
+  main > .chapter-dark + .chapter-dark,
+  main > .chapter-light + .chapter-light {
+    padding-top: clamp(2.5rem, 2rem + 1vw, 4rem);
+  }
+}
+
 /* Section number + micro-rule motif, e.g. "02 / SELECTED WORK" */
 .section-label {
   display: flex;
