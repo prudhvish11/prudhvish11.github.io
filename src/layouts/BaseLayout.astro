@@ -21,6 +21,27 @@ const { title, description, ogImage = '/og/default.png', noIndex = false } = Ast
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const ogImageUrl = new URL(ogImage, Astro.site);
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Prudhvish Narayanam',
+  url: new URL('/', Astro.site).toString(),
+  jobTitle: 'Software Engineer',
+  sameAs: [
+    'https://github.com/prudhvish11',
+    'https://www.linkedin.com/in/prudhvish11/',
+  ],
+  knowsAbout: [
+    'Software Engineering',
+    'Android',
+    'REST APIs',
+    'Backend Systems',
+    'Retrieval-Augmented Generation',
+    'Natural Language Processing',
+    'Machine Learning',
+  ],
+};
 ---
 
 <!doctype html>
@@ -51,6 +72,8 @@ const ogImageUrl = new URL(ogImage, Astro.site);
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)}></script>
 
     <ClientRouter />
   </head>
