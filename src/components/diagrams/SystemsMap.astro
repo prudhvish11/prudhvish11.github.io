@@ -3,269 +3,434 @@ import ArrowLink from '../global/ArrowLink.astro';
 
 const nodes = [
   {
-    id: 'ai',
-    label: 'AI / RAG',
-    area: 'ai',
-    detail: 'Retrieval, embeddings, NLP and computer vision — where the system reasons over unstructured context.',
-    tags: ['RAG', 'NLP', 'ML', 'Computer Vision'],
-    project: { name: 'RAG Code Intelligence', href: '/work/rag-code-intelligence' },
-  },
-  {
     id: 'mobile',
-    label: 'MOBILE',
+    number: '01',
+    label: 'MOBILE / EDGE',
     area: 'mobile',
-    detail: 'Android and enterprise applications, built for REST integration and edge devices in the field.',
-    tags: ['Android', 'Java', 'REST APIs', 'Edge Devices'],
+    strap: 'Software in the real world',
+    detail: 'Enterprise Android software, edge devices and REST integration where reliability matters outside a browser.',
+    evidence: '15,000+ production transit devices',
+    stack: 'Android / Java / REST / Edge',
+    flow: 'DEVICE → ANDROID → REST → CLOUD',
     project: { name: 'Enterprise Android', href: '/work/enterprise-android' },
   },
   {
+    id: 'ai',
+    number: '02',
+    label: 'AI / RAG',
+    area: 'ai',
+    strap: 'Intelligence from context',
+    detail: 'Semantic retrieval and context construction across enterprise repositories for LLM-powered code analysis.',
+    evidence: 'REPOSITORY → RETRIEVAL → CONTEXT',
+    stack: 'Python / Embeddings / RAG / Azure DevOps',
+    flow: 'QUERY → RETRIEVAL → FILES → CONTEXT → ANALYSIS',
+    project: { name: 'RAG Code Intelligence', href: '/work/rag-code-intelligence' },
+  },
+  {
     id: 'backend',
-    label: 'BACKEND',
+    number: '03',
+    label: 'BACKEND / APIs',
     area: 'backend',
-    detail: 'Python services — FastAPI and Flask — exposing REST APIs backed by SQL.',
-    tags: ['FastAPI', 'Flask', 'SQL', 'REST'],
+    strap: 'Services that connect',
+    detail: 'Python services and REST APIs that turn models, workflows and data into usable product capabilities.',
+    evidence: 'MODEL → API → PRODUCT',
+    stack: 'FastAPI / Flask / REST / SQL',
+    flow: 'CLIENT → API → SERVICE → DATA',
     project: { name: 'NLP Hub', href: '/work/nlp-hub' },
   },
   {
     id: 'data',
-    label: 'DATA',
+    number: '04',
+    label: 'DATA / SYNC',
     area: 'data',
-    detail: 'Integration and consistency work: making sure the same data means the same thing everywhere it moves.',
-    tags: ['Data Sync', 'Consistency', 'Pipelines'],
+    strap: 'Reliable data movement',
+    detail: 'Synchronization, consistency and cloud-connected flows where the same data must remain trustworthy everywhere it moves.',
+    evidence: 'EDGE → CLOUD → ANALYTICS',
+    stack: 'SQL / Sync / Consistency / Pipelines',
+    flow: 'EDGE → SYNC → CLOUD → INSIGHT',
     project: null,
   },
 ];
 ---
 
 <div class="systems-map" data-engineering-map>
-  <div class="map-diagram" role="group" aria-label="Systems map — select an area to read more">
-    <span class="node center" aria-hidden="true">SYSTEMS</span>
-    {nodes.map((node) => (
-      <button
-        type="button"
-        class={`node node-${node.area}`}
-        data-map-node={node.id}
-        aria-pressed="false"
-      >
-        {node.label}
-      </button>
-    ))}
+  <div class="map-desktop">
+    <div class="map-diagram" role="group" aria-label="Engineering surface — select an area to read more">
+      <span class="orbit orbit-one" aria-hidden="true"></span>
+      <span class="orbit orbit-two" aria-hidden="true"></span>
+      <span class="axis axis-x" aria-hidden="true"></span>
+      <span class="axis axis-y" aria-hidden="true"></span>
+
+      <span class="node center" aria-hidden="true">SYSTEMS</span>
+
+      {nodes.map((node) => (
+        <button
+          type="button"
+          class={`node node-${node.area}`}
+          data-map-node={node.id}
+          aria-pressed="false"
+        >
+          <span class="node-dot" aria-hidden="true"></span>
+          <span class="node-label">{node.label}</span>
+          <span class="node-strap">{node.strap}</span>
+        </button>
+      ))}
+    </div>
+
+    <div class="map-panels" aria-live="polite">
+      {nodes.map((node) => (
+        <article class="panel" data-map-panel={node.id}>
+          <p class="type-meta panel-number">{node.number} / {node.label}</p>
+          <p class="panel-evidence">{node.evidence}</p>
+          <p class="panel-detail">{node.detail}</p>
+          <p class="type-meta panel-flow">{node.flow}</p>
+          <p class="type-meta panel-stack">{node.stack}</p>
+          {node.project ? (
+            <ArrowLink href={node.project.href} direction="deeper">
+              View {node.project.name}
+            </ArrowLink>
+          ) : (
+            <p class="panel-nolink">Spans multiple production workflows</p>
+          )}
+        </article>
+      ))}
+    </div>
   </div>
 
-  <div class="map-panels">
+  <ol class="map-mobile">
     {nodes.map((node) => (
-      <div class="panel" data-map-panel={node.id}>
-        <p class="panel-detail">{node.detail}</p>
-        <div class="panel-tags">
-          {node.tags.map((tag) => <span class="panel-tag">{tag}</span>)}
+      <li class="mobile-node">
+        <div class="mobile-rail" aria-hidden="true">
+          <span class="mobile-dot"></span>
         </div>
-        {node.project ? (
-          <ArrowLink href={node.project.href} direction="deeper">
-            View case study — {node.project.name}
-          </ArrowLink>
-        ) : (
-          <p class="panel-nolink">Spans multiple projects — no single case study</p>
-        )}
-      </div>
-    ))}
-  </div>
-
-  <ul class="map-stacked">
-    {nodes.map((node) => (
-      <li>
-        <p class="stacked-label">{node.label}</p>
-        <p class="stacked-detail">{node.detail}</p>
-        <div class="panel-tags">
-          {node.tags.map((tag) => <span class="panel-tag">{tag}</span>)}
+        <div class="mobile-copy">
+          <p class="type-meta mobile-number">{node.number}</p>
+          <h3>{node.label}</h3>
+          <p class="mobile-evidence">{node.evidence}</p>
+          <p class="mobile-detail">{node.detail}</p>
+          <p class="type-meta mobile-stack">{node.stack}</p>
+          {node.project ? (
+            <ArrowLink href={node.project.href} direction="deeper">
+              View work
+            </ArrowLink>
+          ) : null}
         </div>
-        {node.project ? (
-          <ArrowLink href={node.project.href} direction="deeper">
-            View case study — {node.project.name}
-          </ArrowLink>
-        ) : (
-          <p class="panel-nolink">Spans multiple projects — no single case study</p>
-        )}
       </li>
     ))}
-  </ul>
+  </ol>
 </div>
 
 <style>
-  .map-diagram {
+  .map-desktop {
     display: none;
   }
 
-  @media (min-width: 700px) {
-    .systems-map {
+  .map-mobile {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--space-8);
+  }
+
+  .mobile-node {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: var(--space-4);
+    min-height: 13rem;
+  }
+
+  .mobile-rail {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .mobile-rail::after {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    bottom: 0;
+    width: 1px;
+    background: var(--border-dark);
+  }
+
+  .mobile-node:last-child .mobile-rail::after {
+    display: none;
+  }
+
+  .mobile-dot {
+    position: relative;
+    z-index: 1;
+    width: 0.8rem;
+    height: 0.8rem;
+    margin-top: 0.25rem;
+    border: 1px solid var(--maroon);
+    border-radius: 50%;
+    background: var(--near-black);
+  }
+
+  .mobile-number {
+    color: var(--maroon);
+  }
+
+  .mobile-copy h3 {
+    margin-top: var(--space-2);
+    font-family: var(--font-sans);
+    font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+    font-weight: 600;
+  }
+
+  .mobile-evidence {
+    margin-top: var(--space-4);
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    line-height: 1.08;
+    color: var(--warm-white);
+  }
+
+  .mobile-detail {
+    margin-top: var(--space-4);
+    max-width: 40ch;
+    color: var(--stone);
+  }
+
+  .mobile-stack {
+    margin-top: var(--space-4);
+  }
+
+  .map-mobile :global(.arrow-link) {
+    margin-top: var(--space-4);
+  }
+
+  @media (min-width: 760px) {
+    .map-mobile {
+      display: none;
+    }
+
+    .map-desktop {
       display: grid;
-      gap: var(--space-12);
+      grid-template-columns: minmax(28rem, 1.25fr) minmax(18rem, 0.75fr);
+      gap: clamp(2rem, 5vw, 6rem);
+      align-items: center;
     }
 
     .map-diagram {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 9rem));
-      grid-template-rows: repeat(3, 4.5rem);
-      grid-template-areas:
-        '. ai .'
-        'mobile center backend'
-        '. data .';
-      justify-content: center;
-      align-items: center;
       position: relative;
+      min-height: 34rem;
+      display: grid;
+      place-items: center;
     }
 
-    .map-diagram::before,
-    .map-diagram::after {
-      content: '';
+    .orbit,
+    .axis {
       position: absolute;
+      pointer-events: none;
+    }
+
+    .orbit {
+      border: 1px solid var(--border-dark);
+      border-radius: 50%;
+    }
+
+    .orbit-one {
+      width: 18rem;
+      height: 18rem;
+    }
+
+    .orbit-two {
+      width: 26rem;
+      height: 26rem;
+      opacity: 0.55;
+    }
+
+    .axis {
       background: var(--border-dark);
     }
 
-    .map-diagram::before {
-      left: 50%;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      transform: translateX(-50%);
+    .axis-x {
+      width: min(88%, 34rem);
+      height: 1px;
     }
 
-    .map-diagram::after {
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 1px;
-      transform: translateY(-50%);
+    .axis-y {
+      width: 1px;
+      height: min(88%, 34rem);
     }
 
     .node {
-      position: relative;
-      z-index: 1;
-      justify-self: center;
-      font-family: var(--font-mono);
-      font-size: var(--text-meta);
-      letter-spacing: 0.06em;
-      padding: var(--space-3) var(--space-4);
-      background: var(--near-black);
-      border: 1px solid var(--border-dark);
+      position: absolute;
+      z-index: 2;
+      width: 12rem;
+      padding: 0;
+      border: 0;
+      background: transparent;
       color: var(--warm-white);
+      text-align: left;
+      cursor: pointer;
     }
 
     .node.center {
-      grid-area: center;
-      color: var(--maroon);
-      border-color: var(--maroon);
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 6.5rem;
+      height: 6.5rem;
+      border: 1px solid var(--maroon);
+      border-radius: 50%;
+      font-family: var(--font-mono);
+      font-size: var(--text-meta);
+      letter-spacing: 0.08em;
+      color: var(--warm-white);
+      background: var(--near-black);
     }
 
     .node-ai {
-      grid-area: ai;
-    }
-    .node-mobile {
-      grid-area: mobile;
-    }
-    .node-backend {
-      grid-area: backend;
-    }
-    .node-data {
-      grid-area: data;
+      top: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
     }
 
-    button.node {
-      cursor: pointer;
+    .node-data {
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
+    .node-mobile {
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .node-backend {
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: right;
+    }
+
+    .node-dot {
+      display: inline-block;
+      width: 0.8rem;
+      height: 0.8rem;
+      margin-bottom: var(--space-2);
+      border: 1px solid var(--warm-white);
+      border-radius: 50%;
+      background: var(--near-black);
       transition:
         background-color var(--duration-fast) var(--ease-standard),
-        color var(--duration-fast) var(--ease-standard);
+        border-color var(--duration-fast) var(--ease-standard),
+        transform var(--duration-fast) var(--ease-standard);
     }
 
-    button.node:hover,
-    button.node:focus-visible,
-    button.node.is-active {
+    .node-label,
+    .node-strap {
+      display: block;
+    }
+
+    .node-label {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .node-strap {
+      margin-top: var(--space-1);
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.04em;
+      color: var(--stone);
+    }
+
+    button.node:hover .node-dot,
+    button.node:focus-visible .node-dot,
+    button.node.is-active .node-dot {
       background: var(--maroon);
       border-color: var(--maroon);
+      transform: scale(1.2);
+    }
+
+    button.node.is-active .node-label {
       color: var(--warm-white);
     }
 
     .map-panels {
-      min-height: 9rem;
-      max-width: 46ch;
-      margin-inline: auto;
-      text-align: center;
-      color: var(--stone);
+      min-height: 24rem;
+      display: flex;
+      align-items: center;
+      border-left: 1px solid var(--border-dark);
+      padding-left: clamp(1.5rem, 4vw, 4rem);
     }
 
     .panel {
       display: none;
+      max-width: 32rem;
     }
 
     .panel.is-active {
       display: block;
+      animation: panel-in var(--duration-medium) var(--ease-standard);
     }
 
-    .map-stacked {
-      display: none;
+    @keyframes panel-in {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .panel-tags {
-      justify-content: center;
-    }
-  }
-
-  .panel-tags {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: var(--space-2);
-    margin-top: var(--space-4);
-  }
-
-  .panel-tag {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.05em;
-    color: var(--warm-white);
-    border: 1px solid var(--border-dark);
-    padding: var(--space-1) var(--space-3);
-  }
-
-  .panel :global(.arrow-link),
-  .map-stacked :global(.arrow-link),
-  .panel-nolink {
-    margin-top: var(--space-4);
-  }
-
-  .panel :global(.arrow-link),
-  .map-stacked :global(.arrow-link) {
-    display: inline-flex;
-  }
-
-  .panel-nolink {
-    font-family: var(--font-mono);
-    font-size: var(--text-meta);
-    color: var(--stone);
-    font-style: italic;
-  }
-
-  @media (max-width: 699px) {
-    .map-panels {
-      display: none;
-    }
-
-    .map-stacked {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-6);
-    }
-
-    .stacked-label {
-      font-family: var(--font-mono);
-      font-size: var(--text-meta);
-      letter-spacing: 0.08em;
+    .panel-number {
       color: var(--maroon);
-      margin-bottom: var(--space-2);
     }
 
-    .stacked-detail {
+    .panel-evidence {
+      margin-top: var(--space-4);
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 1.2rem + 1.3vw, 2.75rem);
+      line-height: 1.02;
+      color: var(--warm-white);
+    }
+
+    .panel-detail {
+      margin-top: var(--space-6);
       color: var(--stone);
       max-width: 42ch;
+    }
+
+    .panel-flow,
+    .panel-stack {
+      margin-top: var(--space-4);
+    }
+
+    .panel-flow {
+      color: var(--warm-white);
+    }
+
+    .panel :global(.arrow-link),
+    .panel-nolink {
+      margin-top: var(--space-8);
+    }
+
+    .panel-nolink {
+      font-family: var(--font-mono);
+      font-size: var(--text-meta);
+      color: var(--stone);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .panel.is-active {
+      animation: none;
+    }
+
+    .node-dot {
+      transition: none;
     }
   }
 </style>
