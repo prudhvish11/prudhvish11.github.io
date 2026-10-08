@@ -45,7 +45,7 @@
   --gutter-desktop: 56px;
 
   /* Rhythm */
-  --chapter-rhythm: clamp(4.5rem, 3.5rem + 3vw, 8rem);
+  --chapter-rhythm: clamp(4.5rem, 3.5rem + 5vw, 10rem);
   --content-max: 1440px;
   --reading-max: 740px;
 
