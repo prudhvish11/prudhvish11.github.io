@@ -26,7 +26,7 @@ import heroPhoto from '../../assets/photos/hero_maroon_original.jpeg';
         src={heroPhoto}
         alt="Prudhvish Narayanam standing outdoors at dusk"
         widths={[480, 768, 1024, 1440]}
-        sizes="(min-width: 1200px) 46vw, (min-width: 700px) 60vw, 92vw"
+        sizes="(min-width: 1600px) 46vw, (min-width: 1200px) 50vw, (min-width: 700px) 60vw, 92vw"
         loading="eager"
         fetchpriority="high"
         quality={82}
@@ -169,6 +169,7 @@ import heroPhoto from '../../assets/photos/hero_maroon_original.jpeg';
       grid-template-columns: 5fr 1fr 6fr;
       column-gap: var(--space-8);
       align-items: start;
+      align-content: start;
     }
 
     .hero-intro {
@@ -180,6 +181,14 @@ import heroPhoto from '../../assets/photos/hero_maroon_original.jpeg';
     .hero-tail {
       grid-column: 1 / 2;
       grid-row: 2;
+      margin-top: var(--space-6);
+    }
+
+    .hero-meta {
+      margin-top: 0;
+    }
+
+    .hero-cta {
       margin-top: var(--space-8);
     }
 
@@ -199,6 +208,35 @@ import heroPhoto from '../../assets/photos/hero_maroon_original.jpeg';
 
     .hero-body {
       max-width: 26ch;
+    }
+  }
+</style>
+
+
+<style>
+  /* Laptop-only balance: reduce the dead centre column and let the portrait
+     carry slightly more visual weight without making it taller. */
+  @media (min-width: 1200px) and (max-width: 1599px) {
+    .hero {
+      min-height: 88svh;
+    }
+
+    .hero-grid {
+      grid-template-columns: minmax(0, 5.15fr) minmax(1.5rem, 0.35fr) minmax(0, 6.5fr);
+      column-gap: var(--space-6);
+    }
+
+    .hero-photo {
+      aspect-ratio: 6 / 7;
+      margin-top: var(--space-4);
+    }
+
+    .hero-intro {
+      padding-top: var(--space-2);
+    }
+
+    .hero-footer-row {
+      padding-top: var(--space-4);
     }
   }
 </style>
