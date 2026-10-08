@@ -2,11 +2,39 @@
 import SectionLabel from '../global/SectionLabel.astro';
 import SystemsMap from '../diagrams/SystemsMap.astro';
 
-const skills = [
-  { label: 'LANGUAGES', value: 'Java / Python / SQL' },
-  { label: 'BACKEND', value: 'FastAPI / Flask / REST', system: 'backend' },
-  { label: 'AI', value: 'RAG / NLP / ML / Computer Vision', system: 'ai' },
-  { label: 'TOOLS', value: 'Git / Docker / Azure DevOps / Android Studio' },
+const evidence = [
+  {
+    number: '01',
+    label: 'MOBILE + EDGE',
+    headline: '15,000+',
+    subhead: 'ENTERPRISE TRANSIT DEVICES',
+    copy: 'Android systems operating across a large production fleet with cloud-integrated data retrieval.',
+    stack: 'ANDROID / JAVA / REST / CLOUD',
+  },
+  {
+    number: '02',
+    label: 'INTELLIGENCE',
+    headline: 'RETRIEVAL → CONTEXT',
+    subhead: 'ENTERPRISE CODE INTELLIGENCE',
+    copy: 'Semantic retrieval, embeddings and repository context for LLM-powered code understanding.',
+    stack: 'PYTHON / EMBEDDINGS / RAG / AZURE DEVOPS',
+  },
+  {
+    number: '03',
+    label: 'CONNECTION',
+    headline: 'EDGE ↔ CLOUD',
+    subhead: 'RELIABLE DATA MOVEMENT',
+    copy: 'REST integrations, synchronization and distributed consistency across device and backend boundaries.',
+    stack: 'REST / SYNC / CONSISTENCY / SQL',
+  },
+  {
+    number: '04',
+    label: 'APPLIED AI',
+    headline: 'VISION → LANGUAGE',
+    subhead: 'MODELS INTO WORKFLOWS',
+    copy: 'Computer vision, OCR, NLP and ML work that connects model output to usable software.',
+    stack: 'YOLOV8 / EASYOCR / NLP / ML',
+  },
 ];
 
 const roles = [
@@ -16,184 +44,306 @@ const roles = [
 ];
 ---
 
-<section class="chapter chapter-dark render-contained" data-chapter-theme="dark" aria-labelledby="systems-heading">
+<section class="chapter chapter-dark render-contained engineering-surface" data-chapter-theme="dark" aria-labelledby="systems-heading">
   <div class="container">
-    <SectionLabel number="07" label="ENGINEERING + EXPERIENCE" />
+    <div class="engineering-kicker">
+      <SectionLabel number="07" label="ENGINEERING" />
+      <p class="type-meta engineering-domains">MOBILE · BACKEND · AI · DATA</p>
+    </div>
 
-    <h2 id="systems-heading" class="type-chapter balance">SYSTEMS<br />OVER<br />BUZZWORDS.</h2>
-    <p class="type-support systems-intro">
-      I work across mobile, backend and intelligent systems — usually where data has to move reliably between them.
-    </p>
+    <div class="engineering-opening">
+      <h2 id="systems-heading" class="type-chapter balance">
+        SYSTEMS<br />OVER<br /><span class="type-serif">BUZZWORDS.</span>
+      </h2>
+      <p class="type-support systems-intro">
+        I work where devices, APIs, data and intelligent systems have to work together reliably.
+      </p>
+    </div>
 
     <div class="systems-map-wrap">
       <SystemsMap />
     </div>
 
-    <p class="type-meta sub-label">CORE STACK</p>
-    <div class="skills-grid">
-      {skills.map((skill) => (
-        <div class="skill-block" data-system={skill.system}>
-          <p class="type-meta">{skill.label}</p>
-          <p class="skill-value">{skill.value}</p>
-        </div>
+    <div class="evidence-grid" aria-label="Engineering evidence">
+      {evidence.map((item) => (
+        <article class="evidence-item">
+          <p class="type-meta evidence-label">{item.number} / {item.label}</p>
+          <p class="evidence-headline">{item.headline}</p>
+          <p class="type-meta evidence-subhead">{item.subhead}</p>
+          <p class="type-body evidence-copy">{item.copy}</p>
+          <p class="type-meta evidence-stack">{item.stack}</p>
+        </article>
       ))}
     </div>
 
-    <p class="type-meta sub-label">CAREER</p>
-    <div class="experience-track" aria-label="Career progression at Accenture">
-      <p class="type-meta track-years"><span>2024</span><span>NOW</span></p>
-      <div class="track-line" aria-hidden="true"></div>
-      <div class="track-roles">
-        {roles.map((role) => (
-          <div class="track-role">
+    <div class="career-block">
+      <div class="career-heading">
+        <p class="type-meta">CAREER / ACCENTURE</p>
+        <p class="career-range type-meta">2024 → NOW</p>
+      </div>
+
+      <div class="career-track" aria-label="Career progression at Accenture">
+        {roles.map((role, index) => (
+          <div class="career-role">
+            <span class="career-dot" aria-hidden="true"></span>
             <p class="role-title">{role.title}</p>
             <p class="type-meta">{role.period}</p>
+            {index < roles.length - 1 ? <span class="career-line" aria-hidden="true"></span> : null}
           </div>
         ))}
       </div>
-      <p class="type-meta track-company">ACCENTURE</p>
+    </div>
+
+    <div class="engineering-close">
+      <p class="closing-line">
+        TOOLS CHANGE.<br /><span class="type-serif">SYSTEM THINKING STAYS.</span>
+      </p>
+      <p class="type-meta tool-line">
+        JAVA / PYTHON / SQL / ANDROID / REST / FASTAPI / FLASK / RAG / NLP / COMPUTER VISION / DOCKER
+      </p>
     </div>
   </div>
 </section>
 
 <style>
+  .engineering-kicker {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-8);
+  }
+
+  .engineering-domains {
+    display: none;
+  }
+
+  .engineering-opening {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .engineering-opening .type-chapter .type-serif {
+    color: var(--warm-white);
+  }
+
   .systems-intro {
-    max-width: 46ch;
-    margin-top: var(--space-6);
+    max-width: 38ch;
     color: var(--stone);
   }
 
   .systems-map-wrap {
     margin-top: var(--space-16);
-    padding-block: var(--space-8);
   }
 
-  .sub-label {
-    margin-top: var(--space-16);
+  .evidence-grid {
+    margin-top: var(--space-24);
+    border-top: 1px solid var(--border-dark);
+  }
+
+  .evidence-item {
+    padding-block: var(--space-8);
+    border-bottom: 1px solid var(--border-dark);
+  }
+
+  .evidence-label {
+    color: var(--maroon);
+  }
+
+  .evidence-headline {
+    margin-top: var(--space-4);
+    font-family: var(--font-serif);
+    font-size: clamp(2.25rem, 1.5rem + 2.2vw, 4.5rem);
+    line-height: 0.98;
+    color: var(--warm-white);
+    letter-spacing: -0.025em;
+  }
+
+  .evidence-subhead {
+    margin-top: var(--space-4);
+    color: var(--warm-white);
+  }
+
+  .evidence-copy {
+    margin-top: var(--space-4);
+    max-width: 36ch;
+    color: var(--stone);
+  }
+
+  .evidence-stack {
+    margin-top: var(--space-6);
+  }
+
+  .career-block {
+    margin-top: var(--space-24);
+  }
+
+  .career-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
     padding-bottom: var(--space-4);
     border-bottom: 1px solid var(--border-dark);
   }
 
-  .skills-grid {
-    margin-top: var(--space-8);
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
-  }
-
-  .skill-block {
-    opacity: 1;
-    transition: opacity var(--duration-medium) var(--ease-standard);
-  }
-
-  .skill-value {
-    margin-top: var(--space-2);
-    font-size: 1.1rem;
+  .career-range {
     color: var(--warm-white);
-    transition: color var(--duration-medium) var(--ease-standard);
   }
 
-  /* Cross-highlight the matching skill when its systems-map node is hovered/focused */
-  .systems-map-wrap:has(button[data-map-node='ai']:hover) ~ .skills-grid .skill-block:not([data-system='ai']),
-  .systems-map-wrap:has(button[data-map-node='ai']:focus-visible) ~ .skills-grid .skill-block:not([data-system='ai']),
-  .systems-map-wrap:has(button[data-map-node='backend']:hover) ~ .skills-grid .skill-block:not([data-system='backend']),
-  .systems-map-wrap:has(button[data-map-node='backend']:focus-visible) ~ .skills-grid .skill-block:not([data-system='backend']),
-  .systems-map-wrap:has(button[data-map-node='mobile']:hover) ~ .skills-grid .skill-block,
-  .systems-map-wrap:has(button[data-map-node='mobile']:focus-visible) ~ .skills-grid .skill-block,
-  .systems-map-wrap:has(button[data-map-node='data']:hover) ~ .skills-grid .skill-block,
-  .systems-map-wrap:has(button[data-map-node='data']:focus-visible) ~ .skills-grid .skill-block {
-    opacity: 0.4;
-  }
-
-  .systems-map-wrap:has(button[data-map-node='ai']:hover) ~ .skills-grid .skill-block[data-system='ai'],
-  .systems-map-wrap:has(button[data-map-node='ai']:focus-visible) ~ .skills-grid .skill-block[data-system='ai'],
-  .systems-map-wrap:has(button[data-map-node='backend']:hover) ~ .skills-grid .skill-block[data-system='backend'],
-  .systems-map-wrap:has(button[data-map-node='backend']:focus-visible) ~ .skills-grid .skill-block[data-system='backend'] {
-    opacity: 1;
-  }
-
-  .systems-map-wrap:has(button[data-map-node='ai']:hover) ~ .skills-grid .skill-block[data-system='ai'] .skill-value,
-  .systems-map-wrap:has(button[data-map-node='ai']:focus-visible) ~ .skills-grid .skill-block[data-system='ai'] .skill-value,
-  .systems-map-wrap:has(button[data-map-node='backend']:hover) ~ .skills-grid .skill-block[data-system='backend'] .skill-value,
-  .systems-map-wrap:has(button[data-map-node='backend']:focus-visible) ~ .skills-grid .skill-block[data-system='backend'] .skill-value {
-    color: var(--maroon);
-  }
-
-  .experience-track {
-    margin-top: var(--space-8);
-  }
-
-  .track-years {
-    max-width: none;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .track-line {
-    position: relative;
-    height: 1px;
-    background: var(--border-dark);
-    margin-block: var(--space-4);
-  }
-
-  .track-line::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(circle, var(--maroon) 2.5px, transparent 2.6px) 0% 50%,
-      radial-gradient(circle, var(--maroon) 2.5px, transparent 2.6px) 50% 50%,
-      radial-gradient(circle, var(--maroon) 3px, transparent 3.1px) 100% 50%;
-    background-repeat: no-repeat;
-  }
-
-  .track-roles {
+  .career-track {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: var(--space-6);
+    padding-top: var(--space-8);
+  }
+
+  .career-role {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.5rem 1fr;
+    grid-template-areas:
+      'dot title'
+      'line period';
+    column-gap: var(--space-4);
+    min-height: 7rem;
+  }
+
+  .career-dot {
+    grid-area: dot;
+    width: 0.7rem;
+    height: 0.7rem;
+    margin-top: 0.35rem;
+    border: 1px solid var(--maroon);
+    border-radius: 50%;
+    background: var(--near-black);
+  }
+
+  .career-line {
+    grid-area: line;
+    width: 1px;
+    height: 100%;
+    margin-left: 0.34rem;
+    background: var(--border-dark);
   }
 
   .role-title {
-    font-family: var(--font-sans);
+    grid-area: title;
+    color: var(--warm-white);
+    font-size: 1.2rem;
     font-weight: 600;
-    font-size: 1.25rem;
+  }
+
+  .career-role .type-meta {
+    grid-area: period;
+    margin-top: var(--space-2);
+  }
+
+  .engineering-close {
+    margin-top: var(--space-24);
+    padding-top: var(--space-12);
+    border-top: 1px solid var(--border-dark);
+  }
+
+  .closing-line {
+    max-width: 18ch;
+    font-family: var(--font-sans);
+    font-size: clamp(2.25rem, 1.6rem + 2.3vw, 4.75rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
     color: var(--warm-white);
   }
 
-  .track-company {
-    max-width: none;
-    text-align: center;
-    letter-spacing: 0.15em;
-    color: var(--warm-white);
-    font-weight: 600;
+  .tool-line {
+    max-width: 72ch;
     margin-top: var(--space-8);
   }
 
-  @media (min-width: 700px) {
-    .skills-grid {
+  @media (min-width: 760px) {
+    .engineering-domains {
+      display: block;
+    }
+
+    .engineering-opening {
+      grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 0.9fr);
+      align-items: end;
+      gap: var(--space-16);
+    }
+
+    .systems-intro {
+      padding-bottom: var(--space-2);
+    }
+
+    .evidence-grid {
+      display: grid;
       grid-template-columns: repeat(2, 1fr);
+    }
+
+    .evidence-item {
+      padding: var(--space-8);
+      border-right: 1px solid var(--border-dark);
+    }
+
+    .evidence-item:nth-child(2n) {
+      border-right: 0;
+    }
+
+    .career-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      padding-top: var(--space-8);
+    }
+
+    .career-role {
+      display: block;
+      min-height: 0;
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .career-dot {
+      position: absolute;
+      top: -0.4rem;
+      left: 0;
+    }
+
+    .career-line {
+      display: none;
+    }
+
+    .career-role:nth-child(2) {
+      text-align: center;
+    }
+
+    .career-role:nth-child(2) .career-dot {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .career-role:nth-child(3) {
+      text-align: right;
+    }
+
+    .career-role:nth-child(3) .career-dot {
+      left: auto;
+      right: 0;
     }
   }
 
-  @media (min-width: 900px) {
-    .skills-grid {
+  @media (min-width: 1100px) {
+    .evidence-grid {
       grid-template-columns: repeat(4, 1fr);
     }
 
-    .track-roles {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
+    .evidence-item {
+      min-height: 25rem;
+      border-right: 1px solid var(--border-dark);
     }
 
-    .track-role:first-child {
-      text-align: left;
+    .evidence-item:nth-child(2n) {
+      border-right: 1px solid var(--border-dark);
     }
 
-    .track-role:last-child {
-      text-align: right;
+    .evidence-item:last-child {
+      border-right: 0;
     }
   }
 </style>
